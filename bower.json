@@ -1,0 +1,25 @@
+{
+  "name": "angular-app",
+  "description": "A dashboard app in angular",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.5.0",
+    "foundation-sites": "^6.2.3",
+    "angular-ui-router": "^0.3.1",
+    "elasticsearch": "^11.0.1",
+    "elasticui": "*",
+    "moment": "^2.14.1",
+    "angular-chart.js": "^0.10.2",
+    "angular-material": "^1.0.9",
+    "ng-js-tree": "^0.0.8"
+  },
+  "devDependencies": {
+    "angular-foundation": "^0.8.0",
+    "angular-charts": "^0.2.7",
+    "angular-nvd3": "^1.0.7",
+    "mermaid": "^6.0.0",
+    "ngmermaid": "ng-mermaid#*",
+    "angular-ui-tree": "^2.17.0"
+  }
+}

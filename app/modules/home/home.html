@@ -1,0 +1,72 @@
+<section layout="row" flex="" class="t-home" eui-index="'files'">
+    <left-sidebar />
+    <div class="columns large-12">
+        <md-button class="md-icon-button float-left" hide-gt-md="" aria-label="Side Panel" ng-click="shared.toggleLeft()">
+            <md-tooltip>Open Left Panel</md-tooltip>
+            <md-icon class="md-yellow" class="material-icons">&#xE5D2;</md-icon>
+        </md-button>
+
+        <!-- <md-button class="md-icon-button float-right" aria-label="Side Panel" ng-click="shared.toggleRight()">
+            <md-tooltip>Open Right Panel</md-tooltip>
+            <md-icon class="md-yellow" class="material-icons">&#xE5D2;</md-icon>
+        </md-button> -->
+
+        <div layout="column" layout-fill="" ng-show="!home.view.active">
+            <br/>
+            <ng-include src="'modules/home/includes/homeDashboard.html'"></ng-include>
+            <br />
+            <div class="u-padding-lg">
+                <h3>Statistics</h3>
+                <br />
+                <div class="columns large-12 u-padding-zero">
+                    <!-- Traffic chart -->
+                    <div class="columns large-4 float-left u-padding-zero">
+                        <div class="c-donut-chart">
+                            <div class="u-padding-sm u-bg-grey has-bottom-b">
+                                <strong>
+                                    <i class="fa fa-pie-chart"></i>
+                                    Content Type
+                                </strong>
+                            </div>
+
+                            <div class="u-padding-20">
+                                <traffic-chart />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns large-8 u-padding-zero">
+                        <div class="c-donut-chart">
+                            <div class="u-padding-sm u-bg-grey has-bottom-b">
+                                <strong>
+                                    <i class="fa fa-line-chart"></i>
+                                    Access
+                                </strong>
+                            </div>
+
+                            <div class="u-padding-20">
+                                <div id="areaChart" class="admin-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="columns large-12 u-padding-zero">
+                    <div class="c-donut-chart">
+                        <div class="u-padding-sm u-bg-grey has-bottom-b">
+                            <strong>
+                                <i class="fa fa-bar-chart"></i>
+                                Modifications
+                            </strong>
+                        </div>
+
+                        <div class="u-padding-20">
+                            <div id="barChart" class="admin-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <right-sidebar />
+</section>

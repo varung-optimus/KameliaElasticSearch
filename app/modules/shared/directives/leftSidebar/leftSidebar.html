@@ -1,0 +1,19 @@
+<md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+    <md-content layout-padding="">
+        <md-list>
+            <!-- <md-subheader class="md-no-sticky">Other</md-subheader> -->
+            <md-list-item ui-sref="home">
+                <md-icon class="md-default-theme">
+                    <i class="fa fa-line-chart"></i>
+                </md-icon>
+                <p>
+                    <a class="md-default-theme">Statistics</a>
+                </p>
+            </md-list-item>
+            <md-list-item ng-click="shared.toggleRight()">
+                <md-icon class="md-default-theme" class="material-icons">&#xE87F;</md-icon>
+                <p>Give Feedback</p>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</md-sidenav>

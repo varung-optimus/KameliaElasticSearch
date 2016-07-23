@@ -1,0 +1,115 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My AngularJS App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://use.fontawesome.com/22f63988f2.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="assets/jstree/dist/themes/default/style.css">
+    <link rel="stylesheet" href="assets/jstree/components.css">
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="bower_components/foundation-sites/dist/foundation-rtl.css">
+    <link rel="stylesheet" href="bower_components/foundation-sites/dist/foundation.min.css">
+    <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
+    <link rel="stylesheet" href="bower_components/mermaid/dist/mermaid.css" />
+    <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css">
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body ng-app="core">
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li ui-sref-active="active">
+                    <a ui-sref="home.home" href="">
+                        <i class="fa fa-home"></i> Home
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="home.dashboard" href="">
+                        <i class="fa fa-tachometer"></i> Dashboard
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="home.browse">
+                        <i class="fa fa-tasks"></i> Browse
+                    </a>
+                </li>
+                <li ui-sref-active="active" href="">
+                    <a ui-sref="home.manage">
+                        <i class="fa fa-sitemap"></i> Manage
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="top-bar-right">
+            <!--<ul class="menu">-->
+            <!--<li><input type="search" placeholder="Search"></li>-->
+            <!--<li><button type="button" class="button">Search</button></li>-->
+            <!--</ul>-->
+        </div>
+    </div>
+
+    <div ui-view></div>
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.js"></script>
+    <script src="bower_components/amcharts/dist/amcharts/amcharts.js"></script>
+    <script src="bower_components/amcharts/dist/amcharts/plugins/responsive/responsive.min.js"></script>
+    <script src="bower_components/amcharts/dist/amcharts/serial.js"></script>
+    <script src="bower_components/amcharts/dist/amcharts/funnel.js"></script>
+    <script src="bower_components/amcharts/dist/amcharts/pie.js"></script>
+    <script src="bower_components/amcharts/dist/amcharts/gantt.js"></script>
+
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/foundation-sites/dist/foundation.min.js"></script>
+    <script src="bower_components/foundation-sites/dist/plugins/foundation.reveal.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
+    <script src="bower_components/mermaid/dist/mermaid.js"></script>
+    <script src="bower_components/angular-foundation-6/dist/angular-foundation.min.js"></script>
+    <script src="bower_components/Chart.js/Chart.js"></script>
+    <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/elastic.js/dist/elastic.js"></script>
+    <script src="bower_components/elasticsearch/elasticsearch.angular.js"></script>
+    <script src="bower_components/elasticui/dist/elasticui.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="app.js"></script>
+
+    <script src="modules/shared/shared.js"></script>
+    <script src="modules/shared/shared.controller.js"></script>
+    <script src="modules/home/home.js"></script>
+    <script src="modules/home/home.controller.js"></script>
+    <script src="modules/dashboard/dashboard.js"></script>
+    <script src="modules/dashboard/dashboard.controller.js"></script>
+    <script src="modules/manage/manage.js"></script>
+    <script src="modules/manage/manage.controller.js"></script>
+    <script src="modules/browse/browse.js"></script>
+    <script src="modules/browse/browse.controller.js"></script>
+
+    <script src="services/index.js"></script>
+
+    <script src="filters/index.js"></script>
+    <script src="filters/FileSizeFilter.js"></script>
+
+    <script src="app.constant.js"></script>
+
+    <!-- Tree -->
+    <script src="assets/jstree/dist/jstree.min.js"></script>
+    <script src="bower_components/ng-js-tree/ngJsTree.js"/>
+    <!-- End -->
+    <script>
+        jQuery(document).ready(function($) {
+            $(document).foundation();
+        });
+    </script>
+</body>
+
+</html>

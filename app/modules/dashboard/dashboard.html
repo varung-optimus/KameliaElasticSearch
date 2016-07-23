@@ -1,0 +1,323 @@
+<div class="expanded row"  eui-index="'files'">
+	<div class="large-2 filters columns has-right-b">
+		<div>
+			<div class="search-box">
+				<div class="input-group">
+					<input class="input-group-field" eui-query="ejs.MatchQuery('Name', dashboard.query)" ng-model="dashboard.fakeQuery" eui-enabled="dashboard.query.length" placeholder="Search.." type="text">
+					<div class="input-group-button">
+						<button class="button" ng-click="dashboard.query=dashboard.fakeQuery"><i class="fa fa-search"></i></button>
+					</div>
+				</div>
+			</div>
+			<div class="head-sep">
+				<h6>Source Type</h6>
+			</div>
+			<div>
+				<ul ng-init="filter1 = false" class="vertical menu">
+					<li>
+						<a class="filter-head" ng-click="filter1 = !filter1">Content Type <span class="fa float-right {{filter1 ? 'fa-angle-down': 'fa-angle-up'}}"></span></a>
+						<ul ng-show="filter1" eui-or-filter class="menu vertical nested">
+							<li>
+								<label>
+									<input eui-filter="ejs.TermsFilter('Content_Type', 'folder')" eui-enabled="dashboard.contentTypeFilters[0]" ng-model="dashboard.contentTypeFilters[0]" type="checkbox"> Folder
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.TermsFilter('Content_Type', 'csv')" eui-enabled="dashboard.contentTypeFilters[1]" ng-model="dashboard.contentTypeFilters[1]"> CSV
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.TermsFilter('Content_Type', 'avro')" eui-enabled="dashboard.contentTypeFilters[2]" ng-model="dashboard.contentTypeFilters[2]"> AVRO
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.TermsFilter('Content_Type', 'json')" eui-enabled="dashboard.contentTypeFilters[3]" ng-model="dashboard.contentTypeFilters[3]"> JSON
+								</label>
+							</li>
+
+						</ul>
+					</li>
+					<li class="text-right  mg-bt-10">
+						<span ng-show="dashboard.hideOrClearFilter('hide', 'content')" ng-click="dashboard.hideOrClearFilter('clear', 'content')" class="clear-btn">clear</span>
+					</li>
+				</ul>
+			</div>
+			<div class="head-sep">
+				<h6>File/Table Size</h6>
+			</div>
+			<div>
+				<ul ng-init="filter2=false" class="vertical menu">
+					<li>
+						<a class="filter-head" ng-click="filter2 = !filter2">Last Accessed <span class="fa float-right {{filter2 ? 'fa-angle-down': 'fa-angle-up'}}"></span></a>
+						<ul ng-show="filter2" eui-or-filter class="menu vertical nested">
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.RangeFilter('Last_Accessed').gte('now-1d')" eui-enabled="dashboard.sizeAccessedFilters[0]"  ng-model="dashboard.sizeAccessedFilters[0]"> Today
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.RangeFilter('Last_Accessed').gte('now-' + dashboard.getDate('week') +'d')" eui-enabled="dashboard.sizeAccessedFilters[1]" ng-model="dashboard.sizeAccessedFilters[1]"> This Week
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.RangeFilter('Last_Accessed').gte('now-'+dashboard.getDate('month') + 'd')" eui-enabled="dashboard.sizeAccessedFilters[2]" ng-model="dashboard.sizeAccessedFilters[2]"> This Month
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.RangeFilter('Last_Accessed').gte('now-'+dashboard.getDate('year')+'M')" eui-enabled="dashboard.sizeAccessedFilters[3]" ng-model="dashboard.sizeAccessedFilters[3]"> This Year
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.RangeFilter('Last_Accessed').lte('now-'+dashboard.getDate('year')+'M')" eui-enabled="dashboard.sizeAccessedFilters[4]" ng-model="dashboard.sizeAccessedFilters[4]"> Before This Year
+								</label>
+							</li>
+							<li>
+								<label>
+									<input style="margin-bottom:5px;" type="checkbox" eui-filter="ejs.RangeFilter('Last_Accessed').lte(dashboard.getFullDate(dashboard.filter1ToDate)).gte(dashboard.getFullDate(dashboard.filter1FromDate))" ng-model="dashboard.sizeAccessedFilters[5]" eui-enabled="dashboard.sizeAccessedFilters[5]">
+									<input type="date" ng-model="dashboard.filter1FromDate">
+									<input type="date" ng-model="dashboard.filter1ToDate">
+								</label>
+							</li>
+
+						</ul>
+					</li>
+					<li class="text-right mg-tp-10">
+						<span ng-show="dashboard.hideOrClearFilter('hide', 'last_accessed')" ng-click="dashboard.hideOrClearFilter('clear', 'last_accessed')" class="clear-btn">clear</span>
+					</li>
+				</ul>
+			</div>
+
+			<div class="separator">
+			</div>
+			<div class="mg-bt-20">
+				<ul ng-init="filter3 = false" class="vertical menu">
+					<li>
+						<a class="filter-head" ng-click="filter3 = !filter3">Last Modified <span class="fa float-right {{filter3 ? 'fa-angle-down': 'fa-angle-up'}}"></span></a>
+						<ul ng-show="filter3" eui-or-filter class="menu vertical nested">
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.RangeFilter('Last_Modified').gte('now-1d')" eui-enabled="dashboard.sizeModifiedFilters[0]" ng-model="dashboard.sizeModifiedFilters[0]"> Today
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.RangeFilter('Last_Modified').gte('now-' + dashboard.getDate('week') +'d')" eui-enabled="dashboard.sizeModifiedFilters[1]" ng-model="dashboard.sizeModifiedFilters[1]"> This Week
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.RangeFilter('Last_Modified').gte('now-'+dashboard.getDate('month') + 'd')" eui-enabled="dashboard.sizeModifiedFilters[2]" ng-model="dashboard.sizeModifiedFilters[2]"> This Month
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.RangeFilter('Last_Modified').gte('now-'+dashboard.getDate('year')+'M')" eui-enabled="dashboard.sizeModifiedFilters[3]" ng-model="dashboard.sizeModifiedFilters[3]"> This Year
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.RangeFilter('Last_Modified').lte('now-'+dashboard.getDate('year')+'M')" eui-enabled="dashboard.sizeModifiedFilters[4]" ng-model="dashboard.sizeModifiedFilters[4]"> Before This Year
+								</label>
+							</li>
+							<li>
+								<label>
+									<input style="margin-bottom:5px;" type="checkbox" eui-filter="ejs.RangeFilter('Last_Modified').lte(dashboard.getFullDate(dashboard.filter2ToDate)).gte(dashboard.getFullDate(dashboard.filter2FromDate))" ng-model="dashboard.sizeModifiedFilters[5]" eui-enabled="dashboard.sizeModifiedFilters[5]">
+									<input type="date" ng-model="dashboard.filter2FromDate">
+									<input type="date" ng-model="dashboard.filter2ToDate">
+								</label>
+							</li>
+
+						</ul>
+					</li>
+					<li class="text-right mg-tp-10">
+						<span ng-show="dashboard.hideOrClearFilter('hide', 'last_modified')" ng-click="dashboard.hideOrClearFilter('clear', 'last_modified')" class="clear-btn">clear</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="columns" ng-class="dashboard.selectedObject ? 'large-8': 'large-10'">
+		<div class="mg-bt-20"></div>
+		<h4>List of Files</h4>
+
+		<div class="loading-wheel" ng-show="indexVM.loading">
+			<span class="fa fa-refresh fa-spin"></span>
+		</div>
+		<p ng-hide="indexVM.loading || indexVM.results.hits.hits.length > 0">No items found.</p>
+
+		<div ng-hide="indexVM.loading || indexVM.results.hits.hits.length == 0">
+			<table class="stack data-table">
+				<thead>
+				<tr>
+					<th><i class="fa fa-file"></i></th>
+					<th><i class="fa fa-star"></i></th>
+					<th
+						class="{{dashboard.filters[0] == dashboard.selectedFilter ? dashboard.sortOrder:''}}"
+						eui-sort="ejs.Sort('Name').order(dashboard.sortOrder)"
+						ng-click="dashboard.selectedFilter = 'Name'; dashboard.sortOrder = dashboard.sortOrder == 'asc' ? 'desc': 'asc'"
+						eui-enabled="dashboard.filters[0] == dashboard.selectedFilter"
+						ng-class="{sorting: dashboard.filters[0] == dashboard.selectedFilter}">
+
+						Name
+						<span class="fa {{dashboard.filters[0] == dashboard.selectedFilter ? (dashboard.sortOrder == 'asc' ? 'fa-angle-up' : 'fa-angle-down') :'fa-angle-down'}}"></span>
+
+					</th>
+					<th
+						class="{{dashboard.filters[1] == dashboard.selectedFilter ? dashboard.sortOrder:''}}"
+						eui-sort="ejs.Sort('Path').order(dashboard.sortOrder)"
+						ng-click="dashboard.selectedFilter = 'Path'; dashboard.sortOrder = dashboard.sortOrder == 'asc' ? 'desc': 'asc'"
+						eui-enabled="dashboard.filters[1] == dashboard.selectedFilter"
+						ng-class="{sorting: dashboard.filters[1] == dashboard.selectedFilter}">
+						Path
+						<span class="fa {{dashboard.filters[1] == dashboard.selectedFilter ? (dashboard.sortOrder == 'asc' ? 'fa-angle-up' : 'fa-angle-down') :'fa-angle-down'}}"></span>
+
+					</th>
+					<th
+						class="{{dashboard.filters[2] == dashboard.selectedFilter ? dashboard.sortOrder:''}}"
+						eui-sort="ejs.Sort('Tag_Count').order(dashboard.sortOrder)"
+						ng-click="dashboard.selectedFilter = 'Tag_Count'; dashboard.sortOrder = dashboard.sortOrder == 'asc' ? 'desc': 'asc'"
+						eui-enabled="dashboard.filters[2] == dashboard.selectedFilter"
+						ng-class="{sorting: dashboard.filters[2] == dashboard.selectedFilter}">
+						Tag Count
+						<span class="fa {{dashboard.filters[2] == dashboard.selectedFilter ? (dashboard.sortOrder == 'asc' ? 'fa-angle-up' : 'fa-angle-down') :'fa-angle-down'}}"></span>
+
+					</th>
+					<th
+						class="{{dashboard.filters[3] == dashboard.selectedFilter ? dashboard.sortOrder:''}}"
+						eui-sort="ejs.Sort('Size').order(dashboard.sortOrder)"
+						ng-click="dashboard.selectedFilter = 'Size'; dashboard.sortOrder = dashboard.sortOrder == 'asc' ? 'desc': 'asc'"
+						eui-enabled="dashboard.filters[3] == dashboard.selectedFilter"
+						ng-class="{sorting: dashboard.filters[3] == dashboard.selectedFilter}">
+						Size
+						<span class="fa {{dashboard.filters[3] == dashboard.selectedFilter ? (dashboard.sortOrder == 'asc' ? 'fa-angle-up' : 'fa-angle-down') :'fa-angle-down'}}"></span>
+
+					</th>
+					<th
+						class="{{dashboard.filters[4] == dashboard.selectedFilter ? dashboard.sortOrder:''}}"
+						eui-sort="ejs.Sort('Last_Accessed').order(dashboard.sortOrder)"
+						ng-click="dashboard.selectedFilter = 'Last_Modified'; dashboard.sortOrder = dashboard.sortOrder == 'asc' ? 'desc': 'asc'"
+						eui-enabled="dashboard.filters[4] == dashboard.selectedFilter"
+						ng-class="{sorting: dashboard.filters[4] == dashboard.selectedFilter}">
+						Last Modified
+						<span class="fa {{dashboard.filters[4] == dashboard.selectedFilter ? (dashboard.sortOrder == 'asc' ? 'fa-angle-up' : 'fa-angle-down') :'fa-angle-down'}}"></span>
+
+					</th>
+					<th><i class="fa fa-cog"></i></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-click="dashboard.selectTableRow($index);dashboard.selectedObject = item._source;dashboard.redrawGraph()"  ng-repeat="item in indexVM.results.hits.hits | limitTo: 50" ng-class="{'selected': $index == dashboard.selectedRow}">
+					<td>
+						<i class="fa" ng-class="{'fa-file': item._source.Type.toLowerCase() == 'file', 'fa-folder': item._source.Type.toLowerCase() == 'folder'}"></i>
+					</td>
+					<td>
+						<i class="fa fa-star"></i>
+					</td>
+					<td>{{item._source.Name}}</td>
+					<td>{{item._source.Path}}</td>
+					<td>
+						<span class="tag-count">{{item._source.Tag_Count}}</span>
+					</td>
+					<td>{{(item._source.Size | size) || 'N/A'}}</td>
+					<td>{{item._source.Last_Modified}}</td>
+					<td><i class="fa fa-cog"></i></td>
+				</tr>
+				</tbody>
+			</table>
+			<div class="paginator">
+				<div class="row expanded">
+					<div class="columns no-pd large-8" ng-init="pageSizes = ['10', '20', '50', '100']; pageSize = pageSizes[0]">
+						<!--<eui-simple-paging></eui-simple-paging>-->
+						<ul style="display: inline-block" class="pagination" role="navigation" aria-label="Pagination">
+							<li ng-class="{disabled:indexVM.page <= 1}" ng-click="indexVM.page = 1">
+								<a><i class="fa fa-step-backward"></i></a>
+							</li>
+							<li ng-class="{disabled:indexVM.page <= 1}" ng-click="indexVM.page= indexVM.page != 1 ? indexVM.page - 1 : indexVM.page">
+								<a><i class="fa fa-caret-left"></i></a>
+							</li>
+							<li ng-click="indexVM.page = page" ng-class="indexVM.page == page ? 'current': ''" ng-repeat="page in dashboard.getPages()">
+								<a ng-if="indexVM.page != page">{{page}}</a>
+								<span ng-if="indexVM.page == page">{{page}}</span>
+							</li>
+							<li ng-class="{disabled:indexVM.pageCount <= indexVM.page}" ng-click="indexVM.page = indexVM.page != indexVM.pageCount ? indexVM.page + 1 : indexVM.page">
+								<a>
+									<i class="fa fa-caret-right"></i>
+								</a>
+							</li>
+							<li ng-class="{disabled:indexVM.pageCount <= indexVM.page}" ng-click="indexVM.page = indexVM.pageCount">
+								<a>
+									<i class="fa fa-step-forward"></i>
+								</a>
+							</li>
+						</ul>
+						<select style="width:70px;margin:0" ng-change="indexVM.pageSize = pageSize" ng-model="pageSize">
+							<option ng-repeat="item in pageSizes track by $index">{{item}}</option>
+						</select>
+					</div>
+					<div class="columns large-4 text-right" style="margin-top:8px;">
+						<span>{{((indexVM.page-1) < 0 ? 0 : (indexVM.page-1)) * indexVM.pageSize + 1}} - {{((indexVM.page-1) * indexVM.pageSize) + indexVM.results.hits.hits.length}} of {{indexVM.results.hits.total}} items</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<br />
+		<!-- Data Pipeline -->
+		<div class="large-12" ng-if="dashboard.selectedObject">
+			<h4>Data Pipeline</h4>
+			<div class="loading-wheel" ng-show="indexVM.loading">
+				<span class="fa fa-refresh fa-spin"></span>
+			</div>
+			<p ng-hide="indexVM.loading || indexVM.results.hits.hits.length > 0">No graph found.</p>
+
+			<div ng-hide="indexVM.loading || indexVM.results.hits.hits.length == 0">
+				<mermaid-graph mermaid="dashboard" is-edit-enabled="true"/>
+			</div>
+
+		</div>
+
+	</div>
+	<div ng-if="dashboard.selectedObject" class="large-2 has-left-b info columns">
+		<h5 style="margin: 10px 0;color:#FFCC00">Details</h5>
+		<label>Name</label>
+		<p class="label-answer">{{dashboard.selectedObject.Name}}</p>
+
+		<label>Path</label>
+		<p class="label-answer">{{dashboard.selectedObject.Path}}</p>
+
+		<label>Size</label>
+		<p class="label-answer">{{(dashboard.selectedObject.Size | size) || 'N/A'}}</p>
+
+		<label>Last Modified</label>
+		<p class="label-answer">{{dashboard.selectedObject.Last_Modified}}</p>
+
+		<label>Last Accessed</label>
+		<p class="label-answer">{{dashboard.selectedObject.Last_Accessed}}</p>
+
+		<label>Last Profiled</label>
+		<p class="label-answer">{{dashboard.selectedObject.Last_Profiled}}</p>
+
+		<label>Last Origin</label>
+		<p class="label-answer">{{dashboard.selectedObject.Origin}}</p>
+
+		<label>Content Type</label>
+		<p class="label-answer">{{dashboard.selectedObject.Content_Type}}</p>
+
+		<label>Type</label>
+		<p class="label-answer">{{dashboard.selectedObject.Type}}</p>
+
+		<label>Field Count</label>
+		<p class="label-answer">{{dashboard.selectedObject.Field_Count}}</p>
+
+		<label>Record Count</label>
+		<p class="label-answer">{{dashboard.selectedObject.Record_Count}}</p>
+
+	</div>
+</div>

@@ -1,0 +1,87 @@
+<div ng-hide="indexVM.loading || indexVM.results.hits.hits.length == 0">
+    <table class="stack data-table data-table-tab-fields" id="fieldsTable">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Data</th>
+                <th>Tags</th>
+                <th>Min</th>
+                <th>Max</th>
+                <th>Count</th>
+                <th>Selected %</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in indexVM.results.hits.hits | limitTo: 50">
+                <td>
+                    {{(indexVM.page-1)*indexVM.pageSize+$index+1}}
+                </td>
+                <td>
+                    {{item._source.name}}
+                </td>
+                <td>
+                    <span class="c--fields-progress-bar">
+                    <progressbar value="item._source.data[0].value" type="{{item._source.data[0].type}}"></progressbar>
+                </span>
+                </td>
+                <td>
+                    <span ng-repeat="tag in item._source.tags track by $index">
+                    <span class="tag-count c--tag" ng-if="$index<4" ng-click="browse.showAdvanced($event, tag)">
+                        {{tag}}
+                    </span>
+                    <strong><span ng-if="$index==4">...</span></strong>
+                    </span>
+                </td>
+                <td>
+                    {{item._source.min}}
+                </td>
+                <td>
+                    {{item._source.max}}
+                </td>
+                <td>
+                    {{item._source.count}}
+                </td>
+                <td>
+                    {{item._source.perc}}%
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Pagination -->
+<div class="paginator">
+    <div class="row expanded">
+        <div class="columns no-pd large-8" ng-init="pageSizes = ['10', '20', '50', '100']; pageSize = pageSizes[0]">
+            <!--<eui-simple-paging></eui-simple-paging>-->
+            <ul style="display: inline-block" class="pagination" role="navigation" aria-label="Pagination">
+                <li ng-class="{disabled:indexVM.page <= 1}" ng-click="indexVM.page = 1">
+                    <a><i class="fa fa-step-backward"></i></a>
+                </li>
+                <li ng-class="{disabled:indexVM.page <= 1}" ng-click="indexVM.page= indexVM.page != 1 ? indexVM.page - 1 : indexVM.page">
+                    <a><i class="fa fa-caret-left"></i></a>
+                </li>
+                <li ng-click="indexVM.page = page" ng-class="indexVM.page == page ? 'current': ''" ng-repeat="page in browse.getPages()">
+                    <a ng-if="indexVM.page != page">{{page}}</a>
+                    <span ng-if="indexVM.page == page">{{page}}</span>
+                </li>
+                <li ng-class="{disabled:indexVM.pageCount <= indexVM.page}" ng-click="indexVM.page = indexVM.page != indexVM.pageCount ? indexVM.page + 1 : indexVM.page">
+                    <a>
+                        <i class="fa fa-caret-right"></i>
+                    </a>
+                </li>
+                <li ng-class="{disabled:indexVM.pageCount <= indexVM.page}" ng-click="indexVM.page = indexVM.pageCount">
+                    <a>
+                        <i class="fa fa-step-forward"></i>
+                    </a>
+                </li>
+            </ul>
+            <select style="width:70px;margin:0" ng-change="indexVM.pageSize = pageSize" ng-model="pageSize">
+                <option ng-repeat="item in pageSizes track by $index">{{item}}</option>
+            </select>
+        </div>
+        <div class="columns large-4 text-right" style="margin-top:8px;">
+            <span>{{((indexVM.page-1) < 0 ? 0 : (indexVM.page-1)) * indexVM.pageSize + 1}} - {{((indexVM.page-1) * indexVM.pageSize) + indexVM.results.hits.hits.length}} of {{indexVM.results.hits.total}} items</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="pie-charts">
+    <div class="large-3 float-left" ng-repeat="chart in shared.charts">
+        <div class="pie-panel clearfix">
+            <div class="pie-chart-item">
+                <div class="columns large-2 u-padding-zero">
+                    <i class="float-left fa-2x fa fa-{{ ::chart.icon }}"></i>
+                </div>
+                <div class="columns large-10 u-padding-zero">
+                    <div class="columns large-6">
+                        <div>{{ ::chart.description }}</div>
+                        <div class="description-stats">{{ ::chart.stats }}</div>
+                    </div>
+
+                    <div class="columns large-6 float-right">
+                        <div class="chart" rel="{{ ::chart.color }}" data-percent="60"> <span class="percent"></span> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

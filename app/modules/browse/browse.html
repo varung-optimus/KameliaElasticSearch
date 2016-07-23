@@ -1,0 +1,214 @@
+<div class="expanded row t-browse" eui-index="'metadata'">
+	<div class="large-2 filters columns has-right-b">
+		<div>
+			<div class="search-box">
+				<div class="input-group">
+					<input class="input-group-field" eui-query="ejs.MatchQuery('name', browse.query)" ng-model="browse.fakeQuery" eui-enabled="browse.query.length" placeholder="Search.." type="text">
+					<div class="input-group-button">
+						<button class="button" ng-click="browse.query=browse.fakeQuery"><i class="fa fa-search"></i></button>
+					</div>
+				</div>
+			</div>
+			<div class="head-sep">
+				<h6>Data Fields</h6>
+			</div>
+			<div>
+				<ul ng-init="filter1 = false" class="vertical menu">
+					<li>
+						<a class="filter-head" ng-click="filter1 = !filter1">Cardinality <span class="fa float-right {{filter1 ? 'fa-angle-down': 'fa-angle-up'}}"></span></a>
+						<ul ng-show="filter1" eui-or-filter class="menu vertical nested">
+							<li>
+								<label>
+									<input eui-filter="ejs.RangeFilter('count').lte(250).gte(0)" eui-enabled="browse.contentTypeFilters[0]" ng-model="browse.cardinalityFilters[0]" type="checkbox"> 0-250
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.RangeFilter('count').lte(500).gte(250)" eui-enabled="browse.cardinalityFilters[1]" ng-model="browse.cardinalityFilters[1]"> 250-500
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.RangeFilter('count').gte(500)" eui-enabled="browse.cardinalityFilters[2]" ng-model="browse.cardinalityFilters[2]"> 500+
+								</label>
+							</li>
+						</ul>
+					</li>
+					<li class="text-right  mg-bt-10">
+						<span ng-show="browse.hideOrClearFilter('hide', 'content')" ng-click="browse.hideOrClearFilter('clear', 'content')" class="clear-btn">clear</span>
+					</li>
+				</ul>
+			</div>
+			<div class="separator">
+			</div>
+			<div>
+				<ul ng-init="filter2=false" class="vertical menu">
+					<li>
+						<a class="filter-head" ng-click="filter2 = !filter2">Density <span class="fa float-right {{filter2 ? 'fa-angle-down': 'fa-angle-up'}}"></span></a>
+						<ul ng-show="filter2" eui-or-filter class="menu vertical nested">
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.RangeFilter('perc').gte('0').lte('25')" eui-enabled="browse.densityFilters[0]" ng-model="browse.densityFilters[0]"> 0%-25%
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.RangeFilter('perc').gte(25).lte(50)" eui-enabled="browse.densityFilters[1]" ng-model="browse.densityFilters[1]"> 25%-50%
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.RangeFilter('perc').gte(50).lte(75)" eui-enabled="browse.densityFilters[2]" ng-model="browse.densityFilters[2]"> 50%-75%
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.RangeFilter('perc').gte(75).lte(100)" eui-enabled="browse.densityFilters[3]" ng-model="browse.densityFilters[3]"> 75%-100%
+								</label>
+							</li>
+						</ul>
+					</li>
+					<li class="text-right mg-tp-10">
+						<span ng-show="browse.hideOrClearFilter('hide', 'perc')" ng-click="browse.hideOrClearFilter('clear', 'perc')" class="clear-btn">clear</span>
+					</li>
+				</ul>
+			</div>
+
+			<div class="separator">
+			</div>
+			<div class="mg-bt-20">
+				<ul ng-init="filter4 = false" class="vertical menu">
+					<li>
+						<a class="filter-head" ng-click="filter4 = !filter4">Type <span class="fa float-right {{filter4 ? 'fa-angle-down': 'fa-angle-up'}}"></span></a>
+						<ul ng-show="filter4" eui-or-filter class="menu vertical nested">
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.TermsFilter('data_field_type', 'date')" eui-enabled="browse.dataFieldTypeFilters[0]" ng-model="browse.dataFieldTypeFilters[0]"> DATE
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.TermsFilter('data_field_type', 'float')" eui-enabled="browse.dataFieldTypeFilters[1]" ng-model="browse.dataFieldTypeFilters[1]"> FLOAT
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.TermsFilter('data_field_type', 'integer')" eui-enabled="browse.dataFieldTypeFilters[2]" ng-model="browse.dataFieldTypeFilters[2]"> INTEGER
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" eui-filter="ejs.TermsFilter('data_field_type', 'string')" eui-enabled="browse.dataFieldTypeFilters[3]" ng-model="browse.dataFieldTypeFilters[3]"> STRING
+								</label>
+							</li>
+
+						</ul>
+					</li>
+					<li class="text-right mg-tp-10">
+						<span ng-show="browse.hideOrClearFilter('hide', 'data_field_type')" ng-click="browse.hideOrClearFilter('clear', 'data_field_type')" class="clear-btn">clear</span>
+					</li>
+				</ul>
+			</div>
+			<div class="head-sep">
+				<h6>Data Tags</h6>
+			</div>
+			<div class="mg-bt-20">
+				<ul ng-init="filter5 = false" class="vertical menu">
+					<li>
+						<a class="filter-head" ng-click="filter5 = !filter5">Tags <span class="fa float-right {{filter5 ? 'fa-angle-down': 'fa-angle-up'}}"></span></a>
+						<ul ng-show="filter5" eui-or-filter class="menu vertical nested">
+							<input class="input-group-field" eui-query="ejs.MatchQuery('tags', browse.tagQuery)" ng-model="browse.tagQuery" eui-enabled="browse.tagQuery.length" placeholder="Search Tag.." type="text">
+						</ul>
+					</li>
+					<li class="text-right mg-tp-10">
+						<span ng-show="browse.hideOrClearFilter('hide', 'last_modified')" ng-click="browse.hideOrClearFilter('clear', 'last_modified')" class="clear-btn">clear</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="columns" ng-class="browse.selectedObject ? 'large-8': 'large-10'">
+		<div class="mg-bt-20"></div>
+		<h4 class="browse-header">
+			Mock_Data.csv
+			<div class="pull-right">
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-cog"></i>
+			</div>
+		</h4>
+
+		<p>
+			There are no tags associated with this item.
+		</p>
+
+		<span ng-init="browse.isSummaryInfoVisible=true" ng-show="browse.isSummaryInfoVisible">
+			<a class="button u-color--black tiny round" ng-click="browse.isSummaryInfoVisible=false">Less Info</a>
+		</span>
+		<span ng-show="!browse.isSummaryInfoVisible">
+			<a class="button u-color--black tiny round" ng-click="browse.isSummaryInfoVisible=true">More Info</a>
+		</span>
+
+		<div class="loading-wheel" ng-show="indexVM.loading">
+			<span class="fa fa-refresh fa-spin"></span>
+		</div>
+
+		<p ng-hide="indexVM.loading || indexVM.results.hits.hits.length > 0">No items found.</p>
+
+		<div ng-hide="indexVM.loading || indexVM.results.hits.hits.length == 0" ng-show="browse.isSummaryInfoVisible">
+			<table class="stack data-table">
+				<thead>
+					<tr>
+						<th>Size</th>
+						<th>Content Type</th>
+						<th>Owner</th>
+						<th>Fields</th>
+						<th>Records</th>
+						<th>Last Modified</th>
+						<th>Last Accessed</th>
+						<th>Last Profiled</th>
+						<th>Origin(s)</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							80.82 KB
+						</td>
+						<td>
+							CSV
+						</td>
+						<td>cloudera</td>
+						<td>6</td>
+						<td>
+							1000
+						</td>
+						<td>
+							11/5/14 8:53 am
+						</td>
+						<td>
+							11/5/14 8:53 am
+						</td>
+						<td>
+							11/5/15 9:27 am
+						</td>
+						<td>
+							N/A
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<br />
+		<!-- Tabs section-->
+		<div>
+			<tabset>
+				<tab ng-repeat="tab in browse.tabs" heading="{{tab.title}}" active="tab.active" ng-click="browse.handleTabClick()">
+					<ng-include src="tab.content"></ng-include>
+				</tab>
+			</tabset>
+		</div>
+
+	</div>
+</div>

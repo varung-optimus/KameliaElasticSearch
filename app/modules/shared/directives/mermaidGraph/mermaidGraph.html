@@ -1,0 +1,29 @@
+<div class="clearfix">
+    <div ng-show="shared.isEditEnabled">
+        <div class="float-left">
+            <a class="button small round info" ng-click="shared.openGraphEditModal()">Add Parent</a>
+            <a class="button small round info">Details</a>
+        </div>
+        <div class="pull-right c-lineage">
+            <div class="float-left c-lineage--text">For selected relationships:</div>
+            <a class="button small round success">Accept</a>
+            <a class="button small round alert">Reject</a>
+        </div>
+
+    	<div class="reveal" id="popup-modal" data-reveal>
+            <div class="primary callout">
+                <h4>Edit Graph</h4>
+                <p><i>Enter the properties below to edit the graph</i></p>
+            </div>
+            <textarea ng-model="shared.mermaid.lineage" rows="15"></textarea>
+            <button class="info button float-right" ng-click="shared.mermaid.redrawGraph()" data-close aria-label="Close modal">Save</button>
+            <button class="close-button" data-close aria-label="Close modal" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+    	</div>
+    </div>
+
+    <div class="graph-flowchart mermaid" id="graph-flowchart">
+        {{shared.mermaid.lineage}}
+    </div>
+</div>

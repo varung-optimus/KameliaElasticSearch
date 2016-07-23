@@ -1,0 +1,1 @@
+# Anuglar app with elastic search integration.

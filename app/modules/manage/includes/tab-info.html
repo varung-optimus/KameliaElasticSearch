@@ -1,0 +1,38 @@
+<form class="t-manage-form">
+    <br />
+    <div>
+        <label>
+            <strong>Name</strong>
+            <input type="text" ng-model="manage.nodeItemSelected.title" placeholder="Name" ng-disabled="!manage.isNewNode" value="Social Security Number">
+        </label>
+        <label>
+            <strong>Description</strong>
+            <input type="text" ng-model="manage.nodeItemSelected.desc" placeholder="Description" ng-disabled="!manage.isNewNode" value="Social Security Number">
+        </label>
+        <label>
+            <strong>Tagging Rule</strong>
+            <input type="text" ng-model="manage.nodeItemSelected.rule" class="u-override-margin" placeholder="Name" ng-disabled="!manage.isNewNode" value="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+        </label>
+        <div class="input-group">
+            <input class="input-group-field" ng-model="manage.nodeItemSelected.test" type="text" placeholder="Test Data..">
+            <div class="input-group-button">
+                <input type="submit" class="button u-grp-btn-override-form" value="Test">
+            </div>
+        </div>
+        <div class="clearfix">
+    		<div class="columns large-4 float-left u-padding-zero">
+                <i class="fa fa-question-circle"></i>
+    			<strong>Min Length</strong>
+                <input class="c-tab--width-sm" type="number" placeholder="11" ng-model="manage.nodeItemSelected.min" ng-disabled="!manage.isNewNode" value="11">
+    		</div>
+    		<div class="columns large-4 float-right u-padding-zero text-right">
+                <i class="fa fa-question-circle"></i>
+    			<strong>Max Length</strong>
+                <input class="float-right c-tab--width-sm" type="number" placeholder="11" ng-disabled="!manage.isNewNode" ng-model="manage.nodeItemSelected.max" value="11">
+    		</div>
+    	</div>
+        <div class="clearfix">
+            <a class="button small warning round" ng-click="manage.saveNewNode()">Save</a>
+        </div>
+    </div>
+</form>

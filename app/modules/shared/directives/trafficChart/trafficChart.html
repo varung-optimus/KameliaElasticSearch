@@ -1,0 +1,14 @@
+<div class="channels-block large-12 t-home--traffic-chart" ng-class="{'transparent': transparent}">
+    <div class="chart-bg"></div>
+    <div class="traffic-chart" id="trafficChart">
+        <div class="canvas-holder">
+            <div class="large-2 donut-chart-legend float-right">
+                <div ng-repeat="legend in legends">
+                    {{legend.name}} - {{legend.color}}
+                </div>
+            </div>
+            <canvas id="chart-area" width="300" height="300" class="large-10"></canvas>
+        </div>
+        <div class="traffic-legend"></div>
+    </div>
+</div>

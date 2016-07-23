@@ -1,0 +1,32 @@
+<div class="t-manage">
+	<div class="columns large-2 u-padding-zero filters columns has-right-b">
+		<br />
+		<div class="head-sep">
+			<h6>Glossary</h6>
+		</div>
+	</div>
+	<!-- Tree implementation -->
+	<div ng-class="manage.isNodeSelected ? 'columns large-6 u-padding-sm' : 'columns large-10 u-padding-sm'">
+		<div js-tree="manage.treeConfig"
+			id="tagTree"
+			ng-model="manage.treeData"
+			should-apply="true"
+			tree-events="select_node:manage.selectNodeCB;create_node:manage.createNodeCB"
+			></div>
+	</div>
+
+	<div class="columns large-4 has-left-b c-manage-right-panel" ng-show="manage.isNodeSelected">
+		<br/>
+		<h4 class="u-color--warning">
+			<strong>{{manage.nodeItemSelected.title}}</strong>
+		</h4>
+
+		<tabset>
+			<tab class="u-tab-half-width round"
+				ng-repeat="tab in manage.tabs"
+				heading="{{tab.title}}" active="tab.active" ng-click="browse.handleTabClick()">
+				<ng-include src="tab.content"></ng-include>
+			</tab>
+		</tabset>
+	</div>
+</div>
