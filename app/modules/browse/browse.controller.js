@@ -22,6 +22,18 @@
             }, ".graph-flowchart");
         }, browse, 1000);
 
+        browse.selectedItem.newTags = [{
+            name: 'tag999'
+        }, {
+            name: 'tag2'
+        }];
+
+        browse.openEditGraphModal = function(item) {
+            browse.selectedItem = item;
+            var popup = new Foundation.Reveal($('#edit-tag-modal'));
+            popup.open();
+        };
+
         browse.handleTabClick = function() {
             setTimeout(function() {
                 browse.redrawGraph();
@@ -44,6 +56,16 @@
         }, {
             title: "History",
             content: ""
+        }];
+
+        browse.editTags = browse.editTags || {};
+        browse.editTags.tabs = [{
+            title: "Add",
+            content: "modules/browse/includes/tagTabs/add.html",
+            active: true
+        }, {
+            title: "Search",
+            content: "modules/browse/includes/tagTabs/search.html"
         }];
 
         browse.cardinalityFilters = [false, false, false, false];

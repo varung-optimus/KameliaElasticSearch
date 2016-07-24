@@ -1,0 +1,25 @@
+<div class="reveal t-browse__tag" id="edit-tag-modal" data-reveal >
+
+    <div class="warning callout">
+        <h4>Add Tag for {{browse.selectedItem._source.name}}</h4>
+    </div>
+
+    <div class="row" ng-repeat="newTag in browse.selectedItem.newTags">
+        <div class="small-6 large-8 columns">
+            {{newTag.name}}
+        </div>
+        <div class="small-6 large-4 columns">
+            <i class="fa info fa-check"></i>
+            <i class="fa danger fa-close"></i>
+        </div>
+    </div>
+
+    <div>
+        <tabset>
+            <tab ng-repeat="tab in browse.editTags.tabs"
+                heading="{{tab.title}}" active="tab.active">
+                <ng-include src="tab.content"></ng-include>
+            </tab>
+        </tabset>
+    </div>
+</div>

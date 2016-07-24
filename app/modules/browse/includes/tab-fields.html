@@ -27,7 +27,7 @@
                 </td>
                 <td>
                     <span ng-repeat="tag in item._source.tags track by $index">
-                    <span class="tag-count c--tag" ng-if="$index<4" ng-click="browse.showAdvanced($event, tag)">
+                    <span class="tag-count c--tag" ng-if="$index<4" ng-click="browse.openEditGraphModal(item)">
                         {{tag}}
                     </span>
                     <strong><span ng-if="$index==4">...</span></strong>

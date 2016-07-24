@@ -493,34 +493,43 @@ tr.angular-ui-tree-empty {
     padding: 10px;
 }
 
-.t-browse .tabs-panel {
+.t-browse .tabs-panel,
+.t-browse__tag .tabs-panel {
     padding: 0px;
 }
 
-.t-browse .tabs-title > a {
+.t-browse .tabs-title > a,
+.t-browse__tag .tabs-title > a{
     padding: 1.5em;
     margin: 0;
     font-weight: bold;
     color: #999;
 }
 
-.t-browse .tabs {
+.t-browse .tabs,
+.t-browse__tag .tabs {
     border: none;
 }
 
-.t-browse .tabs-title>a:focus, .t-browse .tabs-title>a[aria-selected=true] {
+.t-browse .tabs-title>a:focus,
+.t-browse .tabs-title>a[aria-selected=true],
+.t-browse__tag .tabs-title>a:focus,
+.t-browse__tag .tabs-title>a[aria-selected=true] {
     background: transparent;
     border: 1px solid #ddd;
     border-bottom: none;
     border-radius: 0.3em;
 }
 
-.t-browse .data-table-tab-fields tbody td {
+.t-browse .data-table-tab-fields tbody td,
+.t-browse__tag .data-table-tab-fields tbody td {
     padding: 0rem .625rem;
 }
 
 .t-browse .data-table tbody td,
-.t-browse .data-table-tab-fields tbody td {
+.t-browse .data-table-tab-fields tbody td,
+.t-browse__tag .data-table tbody td,
+.t-browse__tag .data-table-tab-fields tbody td {
     font-size: 12px;
 }
 
@@ -668,4 +677,11 @@ a[href*="amcharts"] {
 
 .has-bottom-b {
     border-bottom: 1px solid #ccc;
+}
+
+.reveal {
+    padding: 0;
+}
+.callout.warning {
+    background: #FFCC00;
 }
