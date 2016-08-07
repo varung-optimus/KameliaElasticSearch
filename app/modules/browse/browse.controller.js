@@ -2,9 +2,11 @@
 
     app.controller('BrowseController', BrowseController);
 
-    BrowseController.$inject = ['$scope', '$timeout', '$mdDialog', '$mdMedia'];
+    BrowseController.$inject = ['$scope', '$timeout', '$mdDialog',
+        '$mdMedia', 'esClient', 'euiBrowseTagQuery'
+    ];
 
-    function BrowseController($scope, $timeout, $mdDialog, $mdMedia) {
+    function BrowseController($scope, $timeout, $mdDialog, $mdMedia, esClient, euiBrowseTagQuery) {
         var browse = this;
         browse.selectedRow = null; //intentionally we don't want things auto selected ;)
         browse.selectedObject = null;
@@ -22,6 +24,7 @@
             }, ".graph-flowchart");
         }, browse, 1000);
 
+        browse.selectedItem = browse.selectedItem || {};
         browse.selectedItem.newTags = [{
             name: 'tag999'
         }, {
@@ -118,42 +121,47 @@
             }, ".graph-flowchart");
         };
 
-        function _getTags() {
-            var tags = [];
-
-            var results = null;
-            if ($scope.indexVM.results) {
-                results = $scope.indexVM.results.hits.hits;
-            }
-
-            if (results) {
-                for (var item_index = 0; item_index < results.length; item_index++) {
-                    for (var tag_index = 0; tag_index < results[item_index]._source.tags.length; tag_index++) {
-                        if (tags.indexOf(results[item_index]._source.tags[tag_index]) === -1) {
-                            tags.push(results[item_index]._source.tags[tag_index]);
-                            browse.tagFilters.push(false);
-                        }
-                    }
-                }
-                browse.tags = tags;
-            } else {
-                $timeout(function() {
-                    _getTags();
-                }, 500);
-            }
-        }
-
-        browse.getTags = function() {
-            return _getTags();
-        }
-
         $scope.$watch('indexVM.loading', function(newVal, oldVal) {
             if (newVal) {
                 browse.selectedObject = null;
                 browse.selectedRow = null;
-            } else if (!browse.tags) {
-                browse.tags = browse.getTags();
             }
+        });
+
+        function _refineFieldTabData(resp) {
+            if (!$scope.indexVM.results) {
+                setTimeout(function() {
+                    _refineFieldTabData(resp);
+                }, resp, 100);
+            } else {
+                browse.metadata = $scope.indexVM.results.hits.hits;
+                // Create tag dictionary
+                browse.testIndexData = resp.hits.hits;
+                browse.tagsDict = [];
+                for (var index = 0; index < browse.testIndexData.length; index++) {
+                    var currentItem = browse.testIndexData[index];
+                    browse.tagsDict[currentItem._id] = currentItem;
+                }
+
+                // For each tag in data, get corresponding tag
+                for (var index = 0; index < browse.metadata.length; index++) {
+                    var currentItem = browse.metadata[index]._source;
+                    currentItem.mappedTags = [];
+                    for (var tag_index = 0; tag_index < currentItem.tags.length; tag_index++) {
+                        var tagItem = browse.tagsDict[currentItem.tags[tag_index].tag_id];
+                        currentItem.mappedTags.push(tagItem._source.name);
+                    }
+                    // browse.metadata[index]._source.mappedTags = currentItem.mappedTags;
+                }
+
+            }
+        }
+
+        // Make a search request for the mixed content
+        esClient.search(euiBrowseTagQuery).then(function(resp) {
+            _refineFieldTabData(resp);
+        }, function(err) {
+            console.trace(err.message);
         });
     }
 

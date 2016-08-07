@@ -13,7 +13,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="item in indexVM.results.hits.hits | limitTo: 50">
+            <tr ng-repeat="item in browse.metadata | limitTo: 50">
                 <td>
                     {{(indexVM.page-1)*indexVM.pageSize+$index+1}}
                 </td>
@@ -22,11 +22,11 @@
                 </td>
                 <td>
                     <span class="c--fields-progress-bar">
-                    <progressbar value="item._source.data[0].value" type="{{item._source.data[0].type}}"></progressbar>
+                    <progressbar value="item._source.data.value" type="{{item._source.data.type}}"></progressbar>
                 </span>
                 </td>
                 <td>
-                    <span ng-repeat="tag in item._source.tags track by $index">
+                    <span ng-repeat="tag in item._source.mappedTags track by $index">
                     <span class="tag-count c--tag" ng-if="$index<4" ng-click="browse.openEditGraphModal(item)">
                         {{tag}}
                     </span>

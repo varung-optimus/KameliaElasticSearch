@@ -75,7 +75,7 @@
             var data = [];
             for (var index = 0; index < esData.length; index++) {
                 var parent = '#';
-                if (esData[index]._parent && esData[index]._parent != '0') {
+                if (esData[index]._parent) {
                     parent = esData[index]._parent;
                 }
                 data.push({

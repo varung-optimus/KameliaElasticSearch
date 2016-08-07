@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "dashboad app in angular",
   "devDependencies": {
+    "allmighty-autocomplete": "^1.0.0",
     "http-server": "^0.9.0"
   },
   "scripts": {

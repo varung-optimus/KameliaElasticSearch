@@ -166,10 +166,18 @@
         }
     };
 
+    var browseTagQuery = {
+        index: 'test_index',
+        body: {
+            size: 1000
+        }
+    };
+
     app.constant('euiHost', 'http://41.106.2.2:9200');
     app.constant('euiContentTypeQuery', contentTypeQuery);
     app.constant('euiAccessQuery', accessQuery);
     app.constant('euiModificationsQuery', modificationsQuery);
     app.constant('euiTagQuery', tagQuery);
-    app.constant('euiSaveQuery', saveQuery)
+    app.constant('euiSaveQuery', saveQuery);
+    app.constant('euiBrowseTagQuery', browseTagQuery);
 })(angular.module('core.constants', []));
