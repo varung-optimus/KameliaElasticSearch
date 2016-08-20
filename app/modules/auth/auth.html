@@ -1,0 +1,48 @@
+<div class="row">
+	<br />
+	<br />
+	<form role="form" name="loginForm">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h4 class="modal-title">
+						<strong>Login</strong>
+						<span class="pull-right">
+							<img src="assets/mattermost-logo.png" />
+						</span>
+					</h4>
+				</div>
+
+				<div class="modal-body">
+					<br/>
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-inbox"></i></span>
+						<input class="form-control" placeholder="Email" type="email" ng-model="credentials.email" required name="email" msg-required="Enter a valid email"
+							msg-email="Enter a valid email">
+					</div>
+					<div ng-show="loginForm.email.$error.required && loginForm.email.$dirty" class="alert alert-danger" role="alert">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<span class="sr-only">Error:</span> Email is required.
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-key"></i></span>
+						<input class="form-control" name="password" id="password" placeholder="Password" type="password" ng-model="credentials.password"
+							msg-required="Enter a password" required>
+					</div>
+
+					<br/>
+					<button type="submit" 
+						class="c-login-btn btn btn-default pull-right standard-button btn-full-width" 
+						ng-click="loginForm.$valid && auth.login()">Login</button>
+					
+					<cite>
+						Please use MATTERMOST account to login
+					</cite>
+					<br/>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

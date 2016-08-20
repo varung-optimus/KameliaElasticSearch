@@ -12,7 +12,9 @@
     "moment": "^2.14.1",
     "angular-chart.js": "^0.10.2",
     "angular-material": "^1.0.9",
-    "ng-js-tree": "^0.0.8"
+    "ng-js-tree": "^0.0.8",
+    "ng-auth": "^1.1.4",
+    "angular-cookies": "^1.5.8"
   },
   "devDependencies": {
     "angular-foundation": "^0.8.0",
@@ -21,5 +23,8 @@
     "mermaid": "^6.0.0",
     "ngmermaid": "ng-mermaid#*",
     "angular-ui-tree": "^2.17.0"
+  },
+  "resolutions": {
+    "angular": "1.5.8"
   }
 }

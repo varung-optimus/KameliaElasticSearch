@@ -1,20 +1,20 @@
-(function(app) {
+(function (app) {
     'use strict';
 
     app.controller('AppController', AppController);
-    app.service('esClient', function(esFactory) {
+    app.service('esClient', function (esFactory) {
         return esFactory({
             host: 'http://41.106.2.2:9200'
         });
     });
     app.config(RouteConfig);
     app.config(Routes);
-    app.config(function($mdIconProvider) {
+    app.config(function ($mdIconProvider) {
         $mdIconProvider
             .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
             .defaultIconSet('img/icons/sets/core-icons.svg', 24);
     });
-    app.config(function($mdThemingProvider) {
+    app.config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('amber', {
                 'default': '400', // by default use shade 400 from the pink palette for primary intentions
@@ -37,7 +37,7 @@
     }
 
     function RouteConfig($urlRouterProvider) {
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/login');
     }
 
     function Routes($stateProvider) {
@@ -53,6 +53,7 @@
 })(angular.module('core', [
     'ui.router',
     'core.shared',
+    'core.auth',
     'core.home',
     'core.dashboard',
     'core.manage',
