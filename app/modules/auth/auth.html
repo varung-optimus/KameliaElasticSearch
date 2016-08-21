@@ -18,7 +18,7 @@
 					<br/>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-inbox"></i></span>
-						<input class="form-control" placeholder="Email" type="email" ng-model="credentials.email" required name="email" msg-required="Enter a valid email"
+						<input class="form-control" placeholder="Email" type="email" ng-model="auth.credentials.email" required name="email" msg-required="Enter a valid email"
 							msg-email="Enter a valid email">
 					</div>
 					<div ng-show="loginForm.email.$error.required && loginForm.email.$dirty" class="alert alert-danger" role="alert">
@@ -28,7 +28,7 @@
 
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-key"></i></span>
-						<input class="form-control" name="password" id="password" placeholder="Password" type="password" ng-model="credentials.password"
+						<input class="form-control" name="password" id="password" placeholder="Password" type="password" ng-model="auth.credentials.password"
 							msg-required="Enter a password" required>
 					</div>
 

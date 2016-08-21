@@ -14,4 +14,4 @@
 			});
 	}
 
-})(angular.module('core.auth', ['core.auth.controller', 'core.shared']));
+})(angular.module('core.auth', ['core.auth.controller','core.shared']));

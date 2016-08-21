@@ -52,16 +52,19 @@
 
 })(angular.module('core', [
     'ui.router',
+    'core.services',
     'core.shared',
     'core.auth',
     'core.home',
     'core.dashboard',
     'core.manage',
     'core.browse',
-    'core.services',
     'core.filters',
     'core.constants',
     'elasticui',
     'ngMaterial',
-    'elasticsearch'
+    'elasticsearch',
+    'LocalStorageModule',
+    'ngAnimate',
+    'toastr'
 ]));

@@ -2,14 +2,14 @@
 
 	app.controller('AuthController', AuthController);
 
-	AuthController.$inject = ['$scope', '$rootScope'];
+	AuthController.$inject = ['$scope', 'MattermostService'];
 
-	function AuthController($scope, $rootScope) {
+	function AuthController($scope, MattermostService) {
 		var auth = this;
 
 		auth.login = function() {
-			$rootScope.isAuthenticated = true;
+			MattermostService.login(auth.credentials.email, auth.credentials.password);
 		}
-	}
+	}	
 
-})(angular.module('core.auth.controller', []));
+})(angular.module('core.auth.controller', ['core.services']));
