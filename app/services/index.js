@@ -6,8 +6,8 @@
 
     function MattermostService($http, localStorageService, toastr) {
         var API = {
-            LOGIN: 'users/login',
-            INITIAL_LOAD: 'users/initial_load'
+            LOGIN: 'api/v3/users/login',
+            INITIAL_LOAD: 'api/v3/users/initial_load'
         };
 
         var METHODS = {

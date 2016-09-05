@@ -8,7 +8,7 @@
 		$stateProvider
 			.state('home.browse', {
 				url: '/browse',
-				templateUrl: '/modules/browse/browse.html',
+				templateUrl: './modules/browse/browse.html',
 				controller: 'BrowseController',
 				controllerAs: 'browse'
 			});

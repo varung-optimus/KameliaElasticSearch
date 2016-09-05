@@ -8,7 +8,7 @@
 		$stateProvider
 			.state('home.auth', {
 				url: '/login',
-				templateUrl: '/modules/auth/auth.html',
+				templateUrl: './modules/auth/auth.html',
 				controller: 'AuthController',
 				controllerAs: 'auth'
 			});

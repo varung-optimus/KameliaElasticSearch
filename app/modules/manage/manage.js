@@ -8,7 +8,7 @@
 		$stateProvider
 			.state('home.manage', {
 				url: '/manage',
-				templateUrl: '/modules/manage/manage.html',
+				templateUrl: './modules/manage/manage.html',
 				controller: 'ManageController',
 				controllerAs: 'manage'
 			});
