@@ -463,11 +463,11 @@ tr.angular-ui-tree-empty {
     margin-right: 0px;
 }
 
-.t-manage .tabs-content {
+.t-understand .tabs-content {
     border: 0;
 }
 
-.t-manage .tabs-panel {
+.t-understand .tabs-panel {
     padding: 0;
 }
 
@@ -486,8 +486,8 @@ tr.angular-ui-tree-empty {
     text-align: right;
 }
 
-.t-manage-form input[type="text"],
-.t-manage-form input[type="number"] {
+.t-understand-form input[type="text"],
+.t-understand-form input[type="number"] {
     color: #555;
     font-size: 12px;
 }

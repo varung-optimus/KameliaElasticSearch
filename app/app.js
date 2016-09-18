@@ -57,8 +57,9 @@
     'core.auth',
     'core.home',
     'core.dashboard',
-    'core.manage',
+    'core.understand',
     'core.browse',
+    'core.manage',
     'core.filters',
     'core.constants',
     'elasticui',
@@ -66,5 +67,6 @@
     'elasticsearch',
     'LocalStorageModule',
     'ngAnimate',
-    'toastr'
+    'toastr',
+    'base64'
 ]));

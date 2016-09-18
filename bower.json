@@ -16,7 +16,8 @@
     "ng-auth": "^1.1.4",
     "angular-cookies": "^1.5.8",
     "angular-local-storage": "^0.4.0",
-    "angular-toastr": "^2.1.0"
+    "angular-toastr": "^2.1.0",
+    "angular-base64": "^2.0.5"
   },
   "devDependencies": {
     "angular-foundation": "^0.8.0",

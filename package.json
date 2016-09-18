@@ -7,7 +7,7 @@
     "http-server": "^0.9.0"
   },
   "scripts": {
-    "start": "http-server -a localhost -p 8000 -c-1 ./app"
+    "start": "http-server -a localhost -p 8000 -c-1 ./app --proxy http://ec2-52-51-115-98.eu-west-1.compute.amazonaws.com:6080"
   },
   "dependencies": {
     "angular-chart.js": "^1.0.0-alpha8"

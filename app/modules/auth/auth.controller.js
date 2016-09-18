@@ -2,13 +2,13 @@
 
 	app.controller('AuthController', AuthController);
 
-	AuthController.$inject = ['$scope', 'MattermostService'];
+	AuthController.$inject = ['$scope', 'RadiusService'];
 
-	function AuthController($scope, MattermostService) {
+	function AuthController($scope, RadiusService) {
 		var auth = this;
 
 		auth.login = function() {
-			MattermostService.login(auth.credentials.email, auth.credentials.password);
+			RadiusService.login(auth.credentials.username, auth.credentials.password);
 		}
 	}	
 

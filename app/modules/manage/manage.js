@@ -14,4 +14,4 @@
 			});
 	}
 
-})(angular.module('core.manage', ['core.manage.controller', 'ngJsTree']));
+})(angular.module('core.manage', ['core.manage.controller']));

@@ -1,13 +1,14 @@
 (function (app) {
 
-    app.service('MattermostService', MattermostService);
+    app.service('RadiusService', RadiusService);
 
-    MattermostService.$inject = ['$http', 'localStorageService', 'toastr'];
+    RadiusService.$inject = ['$http', 'localStorageService', 'toastr', 
+    '$base64', '$rootScope', '$state', '$q'];
 
-    function MattermostService($http, localStorageService, toastr) {
+    function RadiusService($http, localStorageService, toastr, $base64, $rootScope, $state, $q) {
         var API = {
-            LOGIN: 'api/v3/users/login',
-            INITIAL_LOAD: 'api/v3/users/initial_load'
+            LOGIN: '/service/xusers/users/userName/',
+            USER_GROUPS: '/service/xusers/{userId}/groups'
         };
 
         var METHODS = {
@@ -16,60 +17,43 @@
         }
         var JSON = 'application/json';
 
-        this.login = function (email, password) {
-            var req = {
-                method: METHODS.POST,
-                url: API.LOGIN,
-                headers: {
-                    'Content-Type': JSON
-                },
-                data: {
-                    "login_id": email,
-                    "password": password
-                }
-            }
+        this.login = function (username, password) {
+            var auth = $base64.encode("admin:admin");
+            var headers = { "Authorization": "Basic " + auth }
 
+            var req = {
+                method: METHODS.GET,
+                url: API.LOGIN + username,
+                headers: headers
+            }
             $http(req)
                 .then(
                 function (response) {
-                    if (response.headers('Token')) {
-                        // Successful login
-                        localStorageService.set('token', response.headers('Token'));
-                        getTeams();
-                    } else {
-                        // Error in retrieving token
-                        toastr.error('Unable to get token. Contact Admin')
-                    }
+                    $rootScope.isAuthenticated = true;
+                    $rootScope.loggedInUser = response.data;
+                    console.log(response.data);
+                    $state.go('home.home');
                 },
+                function (response) {
+                    console.log(response);
+                    toastr.error(response.data.msgDesc);
+                });
+        };
+
+        this.getUserGroups = function (userId, onSuccessCallback) {
+            var deferred = $q.defer();
+            var req = {
+                method: METHODS.GET,
+                url: API.USER_GROUPS.replace('{userId}', userId)
+            }
+            $http(req)
+                .then(
+                onSuccessCallback,
                 function (response) {
                     console.log(response);
                     toastr.error(response.data.message);
                 });
         };
-
-        var getTeams = function () {
-            var req = {
-                method: METHODS.GET,
-                url: API.INITIAL_LOAD,
-                headers: {
-                    'Content-Type': JSON,
-                    'Authorization': 'Bearer ' + localStorageService.get('token')
-                }
-            }
-
-            $http(req)
-                .then(
-                function (response) {
-                    var teams = response.data.teams;
-                    for (var index = 0; index < teams.length; index++) {
-                        toastr.success(teams[index].display_name);
-                    }
-                },
-                function (response) {
-                    console.log(response);
-                    toastr.error(response.data.message);
-                });
-        }
     }
 
 })(angular.module('core.services', []));
