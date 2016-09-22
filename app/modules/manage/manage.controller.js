@@ -19,19 +19,19 @@
             content: "",
             active: true
         }, {
-            title: "Live",
-            content: ""
-        }, {
-            title: "Roles",
-            content: ""
-        }, {
-            title: "Pipelines",
-            content: "modules/manage/includes/tab-pipelines.html"
-        }];
+                title: "Live",
+                content: ""
+            }, {
+                title: "Roles",
+                content: ""
+            }, {
+                title: "Pipelines",
+                content: "modules/manage/includes/tab-pipelines.html"
+            }];
 
-        manage.pipelines = "graph LR \n A[fa:fa-building restaurants_inspection]-->B[fa:fa-file-excel-o restaurants_nyc.csv] \n B-.->C[fa:fa-bullseye restaurants_sep_2014_vc.csv] \n D[fa:fa-building nyc_open]-->E[fa:fa-file-excel-o NYPD_Motor_Vehicle_Collisions_2014.csv] \n E-.->C \n F[fa:fa-file-excel-o nyc.csv]-->G[fa:fa-file-excel-o inspections_sub_8.csv] \n G-->H[fa:fa-file-excel-o 8_8.csv] \n H-.->C \n";
-        setTimeout(function() {
-            manage.pipelines = "graph LR \n A[fa:fa-building restaurants_inspection]-->B[fa:fa-file-excel-o restaurants_nyc.csv] \n B-.->C[fa:fa-bullseye restaurants_sep_2014_vc.csv] \n D[fa:fa-building nyc_open]-->E[fa:fa-file-excel-o NYPD_Motor_Vehicle_Collisions_2014.csv] \n E-.->C \n F[fa:fa-file-excel-o nyc.csv]-->G[fa:fa-file-excel-o inspections_sub_8.csv] \n G-->H[fa:fa-file-excel-o 8_8.csv] \n H-.->C \n";
+        manage.lineage = "graph LR \n A[fa:fa-building restaurants_inspection]-->B[fa:fa-file-excel-o restaurants_nyc.csv] \n B-.->C[fa:fa-bullseye restaurants_sep_2014_vc.csv] \n D[fa:fa-building nyc_open]-->E[fa:fa-file-excel-o NYPD_Motor_Vehicle_Collisions_2014.csv] \n E-.->C \n F[fa:fa-file-excel-o nyc.csv]-->G[fa:fa-file-excel-o inspections_sub_8.csv] \n G-->H[fa:fa-file-excel-o 8_8.csv] \n H-.->C \n";
+        setTimeout(function () {
+            manage.lineage = "graph LR \n A[fa:fa-building restaurants_inspection]-->B[fa:fa-file-excel-o restaurants_nyc.csv] \n B-.->C[fa:fa-bullseye restaurants_sep_2014_vc.csv] \n D[fa:fa-building nyc_open]-->E[fa:fa-file-excel-o NYPD_Motor_Vehicle_Collisions_2014.csv] \n E-.->C \n F[fa:fa-file-excel-o nyc.csv]-->G[fa:fa-file-excel-o inspections_sub_8.csv] \n G-->H[fa:fa-file-excel-o 8_8.csv] \n H-.->C \n";
 
             mermaid.init({
                 startOnLoad: true,
@@ -42,17 +42,25 @@
             }, ".graph-flowchart");
         }, manage, 1000);
 
-        manage.handleTabClick = function() {
-            setTimeout(function() {
+        manage.selectedItem = manage.selectedItem || {};
+       
+        manage.openEditGraphModal = function (item) {
+            manage.selectedItem = item;
+            var popup = new Foundation.Reveal($('#edit-tag-modal'));
+            popup.open();
+        };
+
+        manage.handleTabClick = function () {
+            setTimeout(function () {
                 manage.redrawGraph();
             }, 1000);
         };
 
-        manage.redrawGraph = function() {
+        manage.redrawGraph = function () {
             angular.element(document.querySelector('#graph-flowchart'))
                 .empty()
                 .removeAttr('data-processed')
-                .html(manage.pipelines);
+                .html(manage.lineage);
 
             mermaid.init({
                 startOnLoad: true,
@@ -62,8 +70,6 @@
                 }
             }, ".graph-flowchart");
         };
-
-
 
         function getGroupPoliciesSuccessCallback(response) {
             var groupName = response.config.url.split('?groupName=')[1];
@@ -126,7 +132,7 @@
             }
             console.log(manage.groups);
         }
-        
+
         // Get User groups from user id
         RadiusService.getUserGroups(
             // $rootScope.loggedInUser.id,
