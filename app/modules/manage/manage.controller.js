@@ -11,6 +11,24 @@
         manage.view.hive = true;
         manage.view.kafka = true;
         manage.view.resource = 'my';
+        manage.view.groupDetailPanelVisibility = false;
+        manage.handleDetailPanelVisibility = handleDetailPanelVisibility;
+
+        manage.tabs = [{
+            title: "HDFS",
+            content: "",
+            active: true
+        }, {
+            title: "Live",
+            content: ""
+        }, {
+            title: "Roles",
+            content: ""
+        }, {
+            title: "Pipelines",
+            content: ""
+        }];
+
 
         function getGroupPoliciesSuccessCallback(response) {
             var groupName = response.config.url.split('?groupName=')[1];
@@ -24,6 +42,10 @@
                     manage.groups.vXGroups[groupIndex].hdfs = policies[policyId].resourceName;
                 }
             }
+        }
+
+        function handleDetailPanelVisibility() {
+            manage.view.groupDetailPanelVisibility = !manage.view.groupDetailPanelVisibility;
         }
 
         function onSuccessCallback(response) {

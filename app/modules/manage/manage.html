@@ -87,7 +87,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="group in manage.groups.vXGroups | filter:manage.search">
+				<tr ng-repeat="group in manage.groups.vXGroups | filter:manage.search" ng-click="manage.handleDetailPanelVisibility()">
 					<td>
 						{{group.subject}}
 					</td>
@@ -109,6 +109,15 @@
 				</tr>
 			</tbody>
 		</table>
+	</div>
+	
+	<!-- Tabs section-->
+	<div ng-show="manage.view.groupDetailPanelVisibility" class="c-tabs">
+		<tabset>
+			<tab ng-repeat="tab in manage.tabs" heading="{{tab.title}}" active="tab.active">
+				<ng-include src="tab.content"></ng-include>
+			</tab>
+		</tabset>
 	</div>
 
 </div>
