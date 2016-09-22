@@ -1,11 +1,11 @@
 (function(app) {
     app.controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', '$timeout', '$mdSidenav'];
+    HomeController.$inject = ['$scope', '$timeout', '$mdSidenav', '$rootScope'];
 
-    function HomeController($scope, $timeout, $mdSidenav) {
+    function HomeController($scope, $timeout, $mdSidenav, $rootScope) {
         var home = this;
-
+        $rootScope.isAuthenticated = true;
         $scope.$watch('indexVM', function(newVal, oldVal) {
 			if (newVal) {
                 // We have the results from the elastic ui

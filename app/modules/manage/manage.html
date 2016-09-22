@@ -18,22 +18,76 @@
 					</li>
 				</ul>
 			</div>
+			<div class="separator">
+			</div>
+			<div>
+				<ul class="vertical menu">
+					<li>
+						<a class="filter-head">View Resources<span class="fa float-right {{filter2 ? 'fa-angle-down': 'fa-angle-up'}}"></span></a>
+						<ul class="menu vertical nested">
+							<li>
+								<label>
+									<input type="radio" value="my" ng-model="manage.view.resource"> MY
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="radio" value="all" ng-model="manage.view.resource"> ALL
+								</label>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="separator">
+			</div>
+			<div>
+				<ul class="vertical menu">
+					<li>
+						<a class="filter-head">Columns Visibility<span class="fa float-right {{filter2 ? 'fa-angle-down': 'fa-angle-up'}}"></span></a>
+						<ul class="menu vertical nested">
+							<li>
+								<label>
+									<input type="checkbox" ng-checked="manage.view.hdfs" ng-model="manage.view.hdfs"> HDFS
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" ng-model="manage.view.hive"> HIVE
+								</label>
+							</li>
+							<li>
+								<label>
+									<input type="checkbox" ng-model="manage.view.kafka"> KAFKA
+								</label>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 
 	<div class="columns large-10 u-padding-sm">
+		<label>
+			Search record:
+		</label>
+		<input class="form-control" placeholder="Search" type="text" ng-model="manage.search">
 		<br/>
+		<a class="button u-color--black tiny round">Create New Resource</a>
 		<table class="stack data-table">
 			<thead>
 				<tr>
-					<th>Subject</th>
+					<th>Resource</th>
 					<th>Access Type</th>
 					<th>Status</th>
-					<th>Resource Name</th>
+					<th>Domain</th>
+					<th ng-show="manage.view.hdfs">HDFS Directories</th>
+					<th ng-show="manage.view.hive">HIVE Databases</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="group in manage.groups.vXGroups">
+				<tr ng-repeat="group in manage.groups.vXGroups | filter:manage.search">
 					<td>
 						{{group.subject}}
 					</td>
@@ -41,7 +95,17 @@
 						{{group.permission}}
 					</td>
 					<td>{{group.instance}}</td>
-					<td>Hive</td>
+					<td>{{group.domain}}</td>
+					<td ng-show="manage.view.hdfs">
+						<span class="tag-count c--tag" ng-repeat="hdfsItem in group.hdfs">
+                       		 {{hdfsItem}}
+                   		 </span>
+					</td>
+					<td ng-show="manage.view.hive">
+						<span class="tag-count c--tag" ng-repeat="hiveItem in group.hive">
+                       		 {{hiveItem}}
+                   		 </span>
+					</td>
 				</tr>
 			</tbody>
 		</table>

@@ -8,7 +8,8 @@
     function RadiusService($http, localStorageService, toastr, $base64, $rootScope, $state, $q) {
         var API = {
             LOGIN: '/service/xusers/users/userName/',
-            USER_GROUPS: '/service/xusers/{userId}/groups'
+            USER_GROUPS: '/service/xusers/{userId}/groups',
+            GROUP_POLICIES: '/service/public/api/policy?groupName={groupName}'
         };
 
         var METHODS = {
@@ -16,7 +17,7 @@
             GET: 'GET'
         }
         var JSON = 'application/json';
-
+        
         this.login = function (username, password) {
             var auth = $base64.encode("admin:admin");
             var headers = { "Authorization": "Basic " + auth }
@@ -41,7 +42,6 @@
         };
 
         this.getUserGroups = function (userId, onSuccessCallback) {
-            var deferred = $q.defer();
             var req = {
                 method: METHODS.GET,
                 url: API.USER_GROUPS.replace('{userId}', userId)
@@ -54,6 +54,21 @@
                     toastr.error(response.data.message);
                 });
         };
+
+        this.getGroupPolicies = function (groupName, onSuccessCallback) {
+            var req = {
+                method: METHODS.GET,
+                url: API.GROUP_POLICIES.replace('{groupName}', groupName)
+            }
+            $http(req)
+                .then(
+                onSuccessCallback,
+                function (response) {
+                    console.log(response);
+                    toastr.error(response.data.message);
+                });
+        };
+        
     }
 
 })(angular.module('core.services', []));
