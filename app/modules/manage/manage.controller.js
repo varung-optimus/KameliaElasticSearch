@@ -26,8 +26,43 @@
             content: ""
         }, {
             title: "Pipelines",
-            content: ""
+            content: "modules/manage/includes/tab-pipelines.html"
         }];
+
+        manage.pipelines = "graph LR \n A[fa:fa-building restaurants_inspection]-->B[fa:fa-file-excel-o restaurants_nyc.csv] \n B-.->C[fa:fa-bullseye restaurants_sep_2014_vc.csv] \n D[fa:fa-building nyc_open]-->E[fa:fa-file-excel-o NYPD_Motor_Vehicle_Collisions_2014.csv] \n E-.->C \n F[fa:fa-file-excel-o nyc.csv]-->G[fa:fa-file-excel-o inspections_sub_8.csv] \n G-->H[fa:fa-file-excel-o 8_8.csv] \n H-.->C \n";
+        setTimeout(function() {
+            manage.pipelines = "graph LR \n A[fa:fa-building restaurants_inspection]-->B[fa:fa-file-excel-o restaurants_nyc.csv] \n B-.->C[fa:fa-bullseye restaurants_sep_2014_vc.csv] \n D[fa:fa-building nyc_open]-->E[fa:fa-file-excel-o NYPD_Motor_Vehicle_Collisions_2014.csv] \n E-.->C \n F[fa:fa-file-excel-o nyc.csv]-->G[fa:fa-file-excel-o inspections_sub_8.csv] \n G-->H[fa:fa-file-excel-o 8_8.csv] \n H-.->C \n";
+
+            mermaid.init({
+                startOnLoad: true,
+                flowchart: {
+                    useMaxWidth: false,
+                    htmlLabels: true
+                }
+            }, ".graph-flowchart");
+        }, manage, 1000);
+
+        manage.handleTabClick = function() {
+            setTimeout(function() {
+                manage.redrawGraph();
+            }, 1000);
+        };
+
+        manage.redrawGraph = function() {
+            angular.element(document.querySelector('#graph-flowchart'))
+                .empty()
+                .removeAttr('data-processed')
+                .html(manage.pipelines);
+
+            mermaid.init({
+                startOnLoad: true,
+                flowchart: {
+                    useMaxWidth: false,
+                    htmlLabels: true
+                }
+            }, ".graph-flowchart");
+        };
+
 
 
         function getGroupPoliciesSuccessCallback(response) {
