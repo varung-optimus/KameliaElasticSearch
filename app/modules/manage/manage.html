@@ -124,6 +124,7 @@
 
 			<!-- Tabs section-->
 			<div ng-show="manage.view.groupDetailPanelVisibility">
+				<br />
 				<tabset>
 					<tab ng-repeat="tab in manage.tabs" heading="{{tab.title}}" active="tab.active" ng-click="manage.handleTabClick()">
 						<ng-include src="tab.content"></ng-include>
