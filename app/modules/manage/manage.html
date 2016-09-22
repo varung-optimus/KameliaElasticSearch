@@ -74,43 +74,55 @@
 		</label>
 		<input class="form-control" placeholder="Search" type="text" ng-model="manage.search">
 		<br/>
-		<a class="button u-color--black tiny round">Create New Data Usage</a>
-		<table class="stack data-table">
-			<thead>
-				<tr>
-					<th>Data Usage</th>
-					<th>Access Type</th>
-					<th>Status</th>
-					<th>Domain</th>
-					<th ng-show="manage.view.hdfs">HDFS Directories</th>
-					<th ng-show="manage.view.hive">HIVE Databases</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="group in manage.groups.vXGroups | filter:manage.search" ng-click="manage.handleDetailPanelVisibility()">
-					<td>
-						{{group.subject}}
-					</td>
-					<td>
-						{{group.permission}}
-					</td>
-					<td>{{group.instance}}</td>
-					<td>{{group.domain}}</td>
-					<td ng-show="manage.view.hdfs">
-						<span class="tag-count c--tag" ng-repeat="hdfsItem in group.hdfs">
+
+		<div ng-show="!manage.isNewDataUsage">
+			<a class="button u-color--black tiny round" ng-click="manage.isNewDataUsage=true">Create New Data Usage</a>
+
+			<table class="stack data-table">
+				<thead>
+					<tr>
+						<th>Data Usage</th>
+						<th>Access Type</th>
+						<th>Status</th>
+						<th>Domain</th>
+						<th ng-show="manage.view.hdfs">HDFS Directories</th>
+						<th ng-show="manage.view.hive">HIVE Databases</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="group in manage.groups.vXGroups | filter:manage.search" ng-click="manage.handleDetailPanelVisibility()">
+						<td>
+							{{group.subject}}
+						</td>
+						<td>
+							{{group.permission}}
+						</td>
+						<td>{{group.instance}}</td>
+						<td>{{group.domain}}</td>
+						<td ng-show="manage.view.hdfs">
+							<span class="tag-count c--tag" ng-repeat="hdfsItem in group.hdfs">
                        		 {{hdfsItem}}
                    		 </span>
-					</td>
-					<td ng-show="manage.view.hive">
-						<span class="tag-count c--tag" ng-repeat="hiveItem in group.hive">
+						</td>
+						<td ng-show="manage.view.hive">
+							<span class="tag-count c--tag" ng-repeat="hiveItem in group.hive">
                        		 {{hiveItem}}
                    		 </span>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+		<div ng-show="manage.isNewDataUsage">
+			<a class="button u-color--black tiny round" ng-click="manage.isNewDataUsage=false">Cancel</a>
+			<div>
+				Create New
+			</div>
+		</div>
 	</div>
-	
+
 	<!-- Tabs section-->
 	<div ng-show="manage.view.groupDetailPanelVisibility" class="c-tabs">
 		<tabset>
