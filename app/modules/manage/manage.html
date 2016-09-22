@@ -91,7 +91,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="group in manage.groups.vXGroups | filter:manage.search" ng-click="manage.handleDetailPanelVisibility()">
+						<tr ng-repeat="group in manage.groups.vXGroups | filter:manage.search" ng-click="manage.handleDetailPanelVisibility(group)">
 							<td>
 								{{group.subject}}
 							</td>

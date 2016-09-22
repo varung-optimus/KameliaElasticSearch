@@ -1,0 +1,83 @@
+<div>
+    <p class="filter-head">Data Scientists Group</p>
+    <table class="stack data-table">
+        <thead>
+            <tr>
+                <th>S#</th>
+                <th>User</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="group in manage.groups.vXGroups | filter:manage.search" ng-click="manage.handleDetailPanelVisibility(group)">
+                <td>
+                    {{$index + 1}}
+                </td>
+                <td>
+                    {{group.permission}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br/>
+    <p class="filter-head">Data Engineers Group</p>
+    <table class="stack data-table">
+        <thead>
+            <tr>
+                <th>S#</th>
+                <th>User</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="group in manage.groups.vXGroups | filter:manage.search" ng-click="manage.handleDetailPanelVisibility(group)">
+                <td>
+                    {{$index + 1}}
+                </td>
+                <td>
+                    {{group.permission}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br/>
+    <p class="filter-head">Data Stewards Group</p>
+    <table class="stack data-table">
+        <thead>
+            <tr>
+                <th>S#</th>
+                <th>User</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="group in manage.groups.vXGroups | filter:manage.search" ng-click="manage.handleDetailPanelVisibility(group)">
+                <td>
+                    {{$index + 1}}
+                </td>
+                <td>
+                    {{group.permission}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br/>
+    <p class="filter-head">Data Consumers Group</p>
+    <table class="stack data-table">
+        <thead>
+            <tr>
+                <th>S#</th>
+                <th>User</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="group in manage.groups.vXGroups | filter:manage.search" ng-click="manage.handleDetailPanelVisibility(group)">
+                <td>
+                    {{$index + 1}}
+                </td>
+                <td>
+                    {{group.permission}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

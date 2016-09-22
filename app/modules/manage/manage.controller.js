@@ -19,11 +19,11 @@
             content: "",
             active: true
         }, {
-                title: "Live",
+                title: "Hive",
                 content: ""
             }, {
                 title: "Roles",
-                content: ""
+                content: "modules/manage/includes/tab-roles.html"
             }, {
                 title: "Pipelines",
                 content: "modules/manage/includes/tab-pipelines.html"
@@ -85,8 +85,9 @@
             }
         }
 
-        function handleDetailPanelVisibility() {
+        function handleDetailPanelVisibility(group) {
             manage.view.groupDetailPanelVisibility = !manage.view.groupDetailPanelVisibility;
+            // Initialize Roles with clicked group id
         }
 
         function onSuccessCallback(response) {
@@ -103,7 +104,7 @@
                 var groupSplits = item.split('_');
                 var domain = groupSplits.splice(0, 1).join(' ');
                 var instance = groupSplits.splice(0, 1);
-                var subject = groupSplits.splice(0, 1);
+                var subject = groupSplits.splice(0, 2);
 
                 var permission = groupSplits[groupSplits.length - 1];
 
