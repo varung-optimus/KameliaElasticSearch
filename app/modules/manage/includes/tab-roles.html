@@ -8,12 +8,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="group in manage.groups.vXGroups | filter:manage.search" ng-click="manage.handleDetailPanelVisibility(group)">
+            <tr ng-repeat="member in manage.groups.dataScientists">
                 <td>
                     {{$index + 1}}
                 </td>
                 <td>
-                    {{group.permission}}
+                    {{member.name}}
                 </td>
             </tr>
         </tbody>
@@ -29,12 +29,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="group in manage.groups.vXGroups | filter:manage.search" ng-click="manage.handleDetailPanelVisibility(group)">
+            <tr ng-repeat="member in manage.groups.dataEngineers">
                 <td>
                     {{$index + 1}}
                 </td>
                 <td>
-                    {{group.permission}}
+                    {{member.name}}
                 </td>
             </tr>
         </tbody>
@@ -50,12 +50,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="group in manage.groups.vXGroups | filter:manage.search" ng-click="manage.handleDetailPanelVisibility(group)">
+            <tr ng-repeat="member in manage.groups.dataStewards">
                 <td>
                     {{$index + 1}}
                 </td>
                 <td>
-                    {{group.permission}}
+                    {{member.name}}
                 </td>
             </tr>
         </tbody>
@@ -70,12 +70,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="group in manage.groups.vXGroups | filter:manage.search" ng-click="manage.handleDetailPanelVisibility(group)">
+            <tr ng-repeat="member in manage.groups.dataConsumers">
                 <td>
                     {{$index + 1}}
                 </td>
                 <td>
-                    {{group.permission}}
+                    {{member.name}}
                 </td>
             </tr>
         </tbody>

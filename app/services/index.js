@@ -2,14 +2,16 @@
 
     app.service('RadiusService', RadiusService);
 
-    RadiusService.$inject = ['$http', 'localStorageService', 'toastr', 
-    '$base64', '$rootScope', '$state', '$q'];
+    RadiusService.$inject = ['$http', 'localStorageService', 'toastr',
+        '$base64', '$rootScope', '$state', '$q'];
 
     function RadiusService($http, localStorageService, toastr, $base64, $rootScope, $state, $q) {
         var API = {
             LOGIN: '/service/xusers/users/userName/',
             USER_GROUPS: '/service/xusers/{userId}/groups',
-            GROUP_POLICIES: '/service/public/api/policy?groupName={groupName}'
+            GROUP_POLICIES: '/service/public/api/policy?groupName={groupName}',
+            GROUP_MEMBERS: '/service/xusers/{groupId}/users',
+            GROUP: '/service/xusers/groups?name={groupName}'
         };
 
         var METHODS = {
@@ -17,7 +19,7 @@
             GET: 'GET'
         }
         var JSON = 'application/json';
-        
+
         this.login = function (username, password) {
             var auth = $base64.encode("admin:admin");
             var headers = { "Authorization": "Basic " + auth }
@@ -68,7 +70,35 @@
                     toastr.error(response.data.message);
                 });
         };
-        
+
+        this.getGroup = function (groupName, onSuccessCallback) {
+            var req = {
+                method: METHODS.GET,
+                url: API.GROUP.replace('{groupName}', groupName)
+            }
+            $http(req)
+                .then(
+                onSuccessCallback,
+                function (response) {
+                    console.log(response);
+                    toastr.error(response.data.message);
+                });
+        };
+
+        this.getGroupMembers = function (groupId, onSuccessCallback) {
+            var req = {
+                method: METHODS.GET,
+                url: API.GROUP_MEMBERS.replace('{groupId}', groupId)
+            }
+            $http(req)
+                .then(
+                onSuccessCallback,
+                function (response) {
+                    console.log(response);
+                    toastr.error(response.data.message);
+                });
+        };
+
     }
 
 })(angular.module('core.services', []));

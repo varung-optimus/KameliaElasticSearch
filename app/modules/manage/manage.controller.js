@@ -43,7 +43,7 @@
         }, manage, 1000);
 
         manage.selectedItem = manage.selectedItem || {};
-       
+
         manage.openEditGraphModal = function (item) {
             manage.selectedItem = item;
             var popup = new Foundation.Reveal($('#edit-tag-modal'));
@@ -85,9 +85,106 @@
             }
         }
 
+        function getConsGroupMembersSuccessCallback(response) {
+            manage.groups.dataConsumers = response.data.vXUsers;
+        }
+
+        function getConsGroupIdSuccessCallback(response) {
+            manage.group = response.data.vXGroups[0];
+            // Get group members
+            RadiusService.getGroupMembers(
+                manage.group.id,
+                getConsGroupMembersSuccessCallback);
+        }
+
+        function getStewGroupMembersSuccessCallback(response) {
+            manage.groups.dataStewards = response.data.vXUsers;
+
+            manage.groupNameArr[manage.groupNameArr.length - 1] = 'CONS';
+            var temp = manage.groupNameArr.join('_');
+            // Initialize Roles with clicked group id
+            RadiusService.getGroup(
+                temp,
+                getConsGroupIdSuccessCallback);
+        }
+
+        function getStewGroupIdSuccessCallback(response) {
+            manage.group = response.data.vXGroups[0];
+            // Get group members
+            RadiusService.getGroupMembers(
+                manage.group.id,
+                getStewGroupMembersSuccessCallback);
+        }
+
+        function getEngGroupMembersSuccessCallback(response) {
+            manage.groups.dataEngineers = response.data.vXUsers;
+
+            manage.groupNameArr[manage.groupNameArr.length - 1] = 'DEN';
+            var temp = manage.groupNameArr.join('_');
+            // Initialize Roles with clicked group id
+            RadiusService.getGroup(
+                temp,
+                getStewGroupIdSuccessCallback);
+        }
+
+        function getEngGroupIdSuccessCallback(response) {
+            manage.group = response.data.vXGroups[0];
+            // Get group members
+            RadiusService.getGroupMembers(
+                manage.group.id,
+                getEngGroupMembersSuccessCallback);
+        }
+
+        function getGroupMembersSuccessCallback(response) {
+            manage.groups.dataScientists = response.data.vXUsers;
+
+            manage.groupNameArr[manage.groupNameArr.length - 1] = 'DST';
+            var temp = manage.groupNameArr.join('_');
+            // Initialize Roles with clicked group id
+            RadiusService.getGroup(
+                temp,
+                getEngGroupIdSuccessCallback);
+        }
+
+        function getGroupIdSuccessCallback(response) {
+            manage.group = response.data.vXGroups[0];
+            // Get group members
+            RadiusService.getGroupMembers(
+                manage.group.id,
+                getGroupMembersSuccessCallback);
+        }
+
         function handleDetailPanelVisibility(group) {
             manage.view.groupDetailPanelVisibility = !manage.view.groupDetailPanelVisibility;
+            manage.groupNameArr = group.groupName.split('_');
+
+            manage.groupNameArr[manage.groupNameArr.length - 1] = 'DSC';
+            var temp = manage.groupNameArr.join('_');
             // Initialize Roles with clicked group id
+            RadiusService.getGroup(
+                temp,
+                getGroupIdSuccessCallback);
+
+            // groupNameArr[groupNameArr.length - 1] = 'DEN';
+            // temp = groupNameArr.join('_');
+            // // Initialize Roles with clicked group id
+            // RadiusService.getGroup(
+            //     temp,
+            //     getGroupSuccessCallback);
+
+            // groupNameArr[groupNameArr.length - 1] = 'DST';
+            // temp = groupNameArr.join('_');
+            // // Initialize Roles with clicked group id
+            // RadiusService.getGroup(
+            //     temp,
+            //     getGroupSuccessCallback);
+
+            // groupNameArr[groupNameArr.length - 1] = 'CONS';
+            // temp = groupNameArr.join('_');
+            // // Initialize Roles with clicked group id
+            // RadiusService.getGroup(
+            //     temp,
+            //     getGroupSuccessCallback);
         }
 
         function onSuccessCallback(response) {
