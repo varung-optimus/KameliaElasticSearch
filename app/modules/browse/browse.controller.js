@@ -30,7 +30,7 @@
         }, {
             name: 'tag2'
         }];
-
+        
         browse.openEditGraphModal = function(item) {
             browse.selectedItem = item;
             var popup = new Foundation.Reveal($('#edit-tag-modal'));
