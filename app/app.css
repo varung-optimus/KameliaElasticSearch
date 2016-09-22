@@ -688,7 +688,7 @@ a[href*="amcharts"] {
 .callout.warning {
     background: #FFCC00;
 }
-.c-login-btn {
+.c-login-btn, .c-next-btn {
     background: #FFCC00 !important;
 }
 
@@ -1424,3 +1424,8 @@ input[type="button"].btn-block {
   width: 100%;
 }
 /*End*/
+
+/* Form */
+.u-display-flex {
+    display: flex;
+}
