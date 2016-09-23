@@ -1,0 +1,95 @@
+<div>
+    <form role="form" name="manage.step3Form">
+        <h4 class="filter-head"> Step 3: Accept and Confirm</h4>
+
+        <div>
+            <label class="filter-head">
+                Summary of the request
+            </label>
+            <label>
+                Name: admin
+            </label>
+            <br/>
+            <label>
+                Description: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </label>
+            <br/>
+            <label>
+                Status: PROD
+            </label>
+            <br/>
+            <label>
+                Domaine: Datalab
+            </label>
+            <br/>
+            <label>
+                CPI: cpi
+            </label>
+            <br/>
+            <label>
+                Data Steward: user1, user2, user3
+            </label>
+            <br/>
+            <label>
+                Data Scientists: user1, user2, user3
+            </label>
+            <br/>
+            <label>
+                Data Engineers: user1, user2, user3
+            </label>
+            <br/>
+            <label class="filter-head">
+                Summary of Data Sources
+            </label>
+            <br />
+            <table class="stack data-table">
+                <thead>
+                    <tr>
+                        <th>Data Source</th>
+                        <th>Location</th>
+                        <th>Tags</th>
+                        <th>Approving Request</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            dataSource1
+                        </td>
+                        <td>
+                            /data/source1
+                        </td>
+                        <td>Tag1</td>
+                        <td>a196011</td>
+                    </tr>
+                     <tr>
+                        <td>
+                            dataSource2
+                        </td>
+                        <td>
+                            /data/source2
+                        </td>
+                        <td>Tag2</td>
+                        <td>a196011</td>
+                    </tr>
+                     <tr>
+                        <td>
+                            dataSource3
+                        </td>
+                        <td>
+                            /data/source3
+                        </td>
+                        <td>Tag3</td>
+                        <td>a196011</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <br/>
+
+        <button type="submit" class="c-next-btn btn btn-default pull-right standard-button btn-full-width">Submit</button>
+        <button type="submit" class="c-prev-btn btn u-color--black btn-default pull-right standard-button btn-full-width" ng-click="manage.isStep2Active = true;manage.isStep3Active = false">Prev</button>
+
+    </form>
+</div>

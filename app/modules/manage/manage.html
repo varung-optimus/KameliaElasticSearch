@@ -70,11 +70,13 @@
 
 	<div class="columns large-10 u-padding-sm">
 		<div>
-			<label>
+			<div ng-show="!manage.isNewDataUsage">
+				<label>
 				Search record:
-			</label>
-			<input class="form-control" placeholder="Search" type="text" ng-model="manage.search">
-			<br/>
+				</label >
+				<input class="form-control" placeholder="Search" type="text" ng-model="manage.search">
+				<br/>
+			</div>
 
 			<div ng-show="!manage.isNewDataUsage">
 				<a class="button u-color--black tiny round" ng-click="manage.isNewDataUsage=true">Create New Data Usage</a>
@@ -115,15 +117,22 @@
 				</table>
 			</div>
 
-			<div ng-show="manage.isNewDataUsage">
+			<div ng-show="manage.isNewDataUsage" ng-init="manage.isStep1Active = true">
 				<a class="button u-color--black tiny round" ng-click="manage.isNewDataUsage=false">Cancel</a>
-				<div>
+				<div ng-show="manage.isStep1Active">
 					<ng-include src="'modules/manage/includes/create-new-step-1.html'"></ng-include>
 				</div>
+				<div ng-show="manage.isStep2Active">
+					<ng-include src="'modules/manage/includes/data-sources-step-2.html'"></ng-include>
+				</div>
+				<div ng-show="manage.isStep3Active">
+					<ng-include src="'modules/manage/includes/accept-confirm-step-3.html'"></ng-include>
+				</div>
 			</div>
+			
 
 			<!-- Tabs section-->
-			<div ng-show="manage.view.groupDetailPanelVisibility">
+			<div ng-show="manage.view.groupDetailPanelVisibility && !manage.isNewDataUsage">
 				<br />
 				<tabset>
 					<tab ng-repeat="tab in manage.tabs" heading="{{tab.title}}" active="tab.active" ng-click="manage.handleTabClick()">

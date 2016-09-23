@@ -1429,3 +1429,8 @@ input[type="button"].btn-block {
 .u-display-flex {
     display: flex;
 }
+
+.alert-danger {
+    color: #d9534f;
+    font-style: italic;
+}

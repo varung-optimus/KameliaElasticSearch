@@ -1,40 +1,113 @@
 <div>
-    <h4 class="filter-head"> Step 1: Topic Definition</h4> 
-    <div class="u-display-flex">
-        <label class="large-2">Name</label>
-        <input type="text" class="form-control" placeholder="Name">
-    </div>
-    <div class="u-display-flex">
-        <label class="large-2">Description</label>
-        <input type="text" class="form-control" placeholder="Description">
-    </div>
-    <div class="u-display-flex">
-        <label class="large-2">Status</label>
-        <select class="form-control">
-            <option value="">Select Status</option>
-        </select>
-    </div>
-    <div class="u-display-flex">
-        <label class="large-2">Domaine</label>
-        <select class="form-control">
-            <option value="">Select Domaine</option>
-        </select>
-    </div>
-    <div class="u-display-flex">
-        <label class="large-2">CPI</label>
-        <input type="text" class="form-control" placeholder="Description">
-    </div>
-    <div class="u-display-flex">
-        <label class="large-2">Data Steward</label>
-        <input type="text" class="form-control" placeholder="Description">
-    </div>
-    <div class="u-display-flex">
-        <label class="large-2">Data Scientists</label>
-        <input type="text" class="form-control" placeholder="Description">
-    </div>
-    <div class="u-display-flex">
-        <label class="large-2">Data Engineers</label>
-        <input type="text" class="form-control" placeholder="Description">
-    </div>
-    <button type="submit" class="c-next-btn btn btn-default pull-right standard-button btn-full-width" >Next</button>
+    <form role="form" name="manage.step1Form">
+        <h4 class="filter-head"> Step 1: Topic Definition</h4>
+        <!-- Name -->
+        <div class="u-display-flex">
+            <label class="large-2">Name</label>
+            <input class="form-control" placeholder="Name" type="text" ng-model="create.step1.name" required name="name" ng-minlength="5"
+                ng-maxlength="10">
+        </div>
+        <div ng-show="manage.step1Form.name.$error.required && manage.step1Form.name.$dirty" class="text-right large-12 alert alert-danger"
+            role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span> Name is required.
+            <br/><br/>
+        </div>
+        <div ng-show="manage.step1Form.name.$error.minlength && manage.step1Form.name.$dirty" class="text-right large-12 alert alert-danger"
+            role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span> Name should be atleast 5 characters
+            <br/><br/>
+        </div>
+        <div ng-show="manage.step1Form.name.$error.maxlength && manage.step1Form.name.$dirty" class="text-right large-12 alert alert-danger"
+            role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span> Name should be atmost 10 characters
+            <br/><br/>
+        </div>
+
+        <!-- Description -->
+        <div class="u-display-flex">
+            <label class="large-2">Description</label>
+            <textarea placeholder="Description" ng-model="create.step1.desc" name="desc" required ng-minlength="250" mg-maxlength="1000">
+            </textarea>
+        </div>
+        <div ng-show="manage.step1Form.desc.$error.required && manage.step1Form.desc.$dirty" class="text-right large-12 alert alert-danger"
+            role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span> Description is required.
+            <br/><br/>
+        </div>
+        <div ng-show="manage.step1Form.desc.$error.minlength && manage.step1Form.desc.$dirty" class="text-right large-12 alert alert-danger"
+            role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span> Description should be atleast 250 characters
+            <br/><br/>
+        </div>
+        <div ng-show="manage.step1Form.desc.$error.maxlength && manage.step1Form.desc.$dirty" class="text-right large-12 alert alert-danger"
+            role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span> Description should be atmost 1000 characters
+            <br/><br/>
+        </div>
+
+        <!-- Status -->
+        <div class="u-display-flex">
+            <label class="large-2">Status</label>
+            <select class="form-control" ng-if="manage.belongsToVVV" ng-model="manage.step1Form.status">
+                <option value="">Select Status</option>
+                <option value="POC">POC</option>
+            </select>
+            <select class="form-control" ng-if="!manage.belongsToVVV" ng-model="manage.step1Form.status">
+                <option value="">Select Status</option>
+                <option value="EXPLO">EXPLO</option>
+                <option value="PROD">PROD</option>
+            </select>
+        </div>
+
+        <!-- Domaine -->
+        <div class="u-display-flex">
+            <label class="large-2">Domaine</label>
+            <select class="form-control" ng-if="manage.belongsToVVV">
+                <option value="">Select Domaine</option>
+                <option value="Datalab">Datalab</option>
+            </select>
+            <select class="form-control" ng-if="!manage.belongsToVVV">
+                <option value="">Select Domaine</option>
+                <option value="Quality">Quality</option>
+                <option value="Commerce">Commerce</option>
+            </select>
+        </div>
+
+        <!-- CPI -->
+        <div class="u-display-flex" ng-if="manage.step1Form.status !== 'PROD'">
+            <label class="large-2">CPI</label>
+            <input type="text" class="form-control" disabled="disabled" name="cpi" placeholder="CPI">
+        </div>
+        <div class="u-display-flex" ng-if="manage.step1Form.status === 'PROD'">
+            <label class="large-2">CPI</label>
+            <input type="text" class="form-control" ng-model="manage.step1Form.cpi" required name="cpi" placeholder="CPI">
+        </div>
+        <div ng-show="manage.step1Form.cpi.$error.required && manage.step1Form.cpi.$dirty" class="text-right large-12 alert alert-danger"
+            role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span> CPI is required.
+            <br/><br/>
+        </div>
+
+        <!-- Data Steward -->
+        <div class="u-display-flex">
+            <label class="large-2">Data Steward</label>
+            <input type="text" class="form-control" placeholder="Data Steward" required ng-model="manage.step1Form.steward">
+        </div>
+        <div class="u-display-flex">
+            <label class="large-2">Data Scientists</label>
+            <input type="text" class="form-control" placeholder="Data Scientists" required ng-model="manage.step1Form.scientists">
+        </div>
+        <div class="u-display-flex">
+            <label class="large-2">Data Engineers</label>
+            <input type="text" class="form-control" placeholder="Data Engineers" required ng-model="manage.step1Form.engineers">
+        </div>
+        <button type="submit" class="c-next-btn btn btn-default pull-right standard-button btn-full-width" ng-click="manage.isStep1Active = false; manage.isStep2Active=true">Next</button>
+    </form>
 </div>

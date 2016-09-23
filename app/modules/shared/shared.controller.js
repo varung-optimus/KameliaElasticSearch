@@ -68,22 +68,22 @@
         var pieColor = 'rgba(255, 204, 0, 0.6)';
         shared.charts = [{
             color: pieColor,
-            description: 'New Visits',
+            description: 'kpi-1',
             stats: '57,820',
             icon: 'user-plus',
         }, {
             color: pieColor,
-            description: 'Purchases',
+            description: 'kpi-2',
             stats: '$ 89,745',
             icon: 'dollar',
         }, {
             color: pieColor,
-            description: 'Active Users',
+            description: 'kpi-3',
             stats: '178,391',
             icon: 'user',
         }, {
             color: pieColor,
-            description: 'Returned',
+            description: 'kpi-4',
             stats: '32,592',
             icon: 'refresh',
         }];

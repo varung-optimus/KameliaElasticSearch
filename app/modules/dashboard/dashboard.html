@@ -1,9 +1,10 @@
-<div class="expanded row"  eui-index="'files'">
+<div class="expanded row" eui-index="'files'">
 	<div class="large-2 filters columns has-right-b">
 		<div>
 			<div class="search-box">
 				<div class="input-group">
-					<input class="input-group-field" eui-query="ejs.MatchQuery('Name', dashboard.query)" ng-model="dashboard.fakeQuery" eui-enabled="dashboard.query.length" placeholder="Search.." type="text">
+					<input class="input-group-field" eui-query="ejs.MatchQuery('Name', dashboard.query)" ng-model="dashboard.fakeQuery" eui-enabled="dashboard.query.length"
+						placeholder="Search.." type="text">
 					<div class="input-group-button">
 						<button class="button" ng-click="dashboard.query=dashboard.fakeQuery"><i class="fa fa-search"></i></button>
 					</div>
@@ -41,7 +42,8 @@
 						</ul>
 					</li>
 					<li class="text-right  mg-bt-10">
-						<span ng-show="dashboard.hideOrClearFilter('hide', 'content')" ng-click="dashboard.hideOrClearFilter('clear', 'content')" class="clear-btn">clear</span>
+						<span ng-show="dashboard.hideOrClearFilter('hide', 'content')" ng-click="dashboard.hideOrClearFilter('clear', 'content')"
+							class="clear-btn">clear</span>
 					</li>
 				</ul>
 			</div>
@@ -89,7 +91,8 @@
 						</ul>
 					</li>
 					<li class="text-right mg-tp-10">
-						<span ng-show="dashboard.hideOrClearFilter('hide', 'last_accessed')" ng-click="dashboard.hideOrClearFilter('clear', 'last_accessed')" class="clear-btn">clear</span>
+						<span ng-show="dashboard.hideOrClearFilter('hide', 'last_accessed')" ng-click="dashboard.hideOrClearFilter('clear', 'last_accessed')"
+							class="clear-btn">clear</span>
 					</li>
 				</ul>
 			</div>
@@ -137,7 +140,8 @@
 						</ul>
 					</li>
 					<li class="text-right mg-tp-10">
-						<span ng-show="dashboard.hideOrClearFilter('hide', 'last_modified')" ng-click="dashboard.hideOrClearFilter('clear', 'last_modified')" class="clear-btn">clear</span>
+						<span ng-show="dashboard.hideOrClearFilter('hide', 'last_modified')" ng-click="dashboard.hideOrClearFilter('clear', 'last_modified')"
+							class="clear-btn">clear</span>
 					</li>
 				</ul>
 			</div>
@@ -155,80 +159,68 @@
 		<div ng-hide="indexVM.loading || indexVM.results.hits.hits.length == 0">
 			<table class="stack data-table">
 				<thead>
-				<tr>
-					<th><i class="fa fa-file"></i></th>
-					<th><i class="fa fa-star"></i></th>
-					<th
-						class="{{dashboard.filters[0] == dashboard.selectedFilter ? dashboard.sortOrder:''}}"
-						eui-sort="ejs.Sort('Name').order(dashboard.sortOrder)"
-						ng-click="dashboard.selectedFilter = 'Name'; dashboard.sortOrder = dashboard.sortOrder == 'asc' ? 'desc': 'asc'"
-						eui-enabled="dashboard.filters[0] == dashboard.selectedFilter"
-						ng-class="{sorting: dashboard.filters[0] == dashboard.selectedFilter}">
+					<tr>
+						<th><i class="fa fa-file"></i></th>
+						<th><i class="fa fa-star"></i></th>
+						<th class="{{dashboard.filters[0] == dashboard.selectedFilter ? dashboard.sortOrder:''}}" eui-sort="ejs.Sort('Name').order(dashboard.sortOrder)"
+							ng-click="dashboard.selectedFilter = 'Name'; dashboard.sortOrder = dashboard.sortOrder == 'asc' ? 'desc': 'asc'" eui-enabled="dashboard.filters[0] == dashboard.selectedFilter"
+							ng-class="{sorting: dashboard.filters[0] == dashboard.selectedFilter}">
 
-						Name
-						<span class="fa {{dashboard.filters[0] == dashboard.selectedFilter ? (dashboard.sortOrder == 'asc' ? 'fa-angle-up' : 'fa-angle-down') :'fa-angle-down'}}"></span>
+							Name
+							<span class="fa {{dashboard.filters[0] == dashboard.selectedFilter ? (dashboard.sortOrder == 'asc' ? 'fa-angle-up' : 'fa-angle-down') :'fa-angle-down'}}"></span>
 
-					</th>
-					<th
-						class="{{dashboard.filters[1] == dashboard.selectedFilter ? dashboard.sortOrder:''}}"
-						eui-sort="ejs.Sort('Path').order(dashboard.sortOrder)"
-						ng-click="dashboard.selectedFilter = 'Path'; dashboard.sortOrder = dashboard.sortOrder == 'asc' ? 'desc': 'asc'"
-						eui-enabled="dashboard.filters[1] == dashboard.selectedFilter"
-						ng-class="{sorting: dashboard.filters[1] == dashboard.selectedFilter}">
-						Path
-						<span class="fa {{dashboard.filters[1] == dashboard.selectedFilter ? (dashboard.sortOrder == 'asc' ? 'fa-angle-up' : 'fa-angle-down') :'fa-angle-down'}}"></span>
+						</th>
+						<th class="{{dashboard.filters[1] == dashboard.selectedFilter ? dashboard.sortOrder:''}}" eui-sort="ejs.Sort('Path').order(dashboard.sortOrder)"
+							ng-click="dashboard.selectedFilter = 'Path'; dashboard.sortOrder = dashboard.sortOrder == 'asc' ? 'desc': 'asc'" eui-enabled="dashboard.filters[1] == dashboard.selectedFilter"
+							ng-class="{sorting: dashboard.filters[1] == dashboard.selectedFilter}">
+							Path
+							<span class="fa {{dashboard.filters[1] == dashboard.selectedFilter ? (dashboard.sortOrder == 'asc' ? 'fa-angle-up' : 'fa-angle-down') :'fa-angle-down'}}"></span>
 
-					</th>
-					<th
-						class="{{dashboard.filters[2] == dashboard.selectedFilter ? dashboard.sortOrder:''}}"
-						eui-sort="ejs.Sort('Tag_Count').order(dashboard.sortOrder)"
-						ng-click="dashboard.selectedFilter = 'Tag_Count'; dashboard.sortOrder = dashboard.sortOrder == 'asc' ? 'desc': 'asc'"
-						eui-enabled="dashboard.filters[2] == dashboard.selectedFilter"
-						ng-class="{sorting: dashboard.filters[2] == dashboard.selectedFilter}">
-						Tag Count
-						<span class="fa {{dashboard.filters[2] == dashboard.selectedFilter ? (dashboard.sortOrder == 'asc' ? 'fa-angle-up' : 'fa-angle-down') :'fa-angle-down'}}"></span>
+						</th>
+						<th class="{{dashboard.filters[2] == dashboard.selectedFilter ? dashboard.sortOrder:''}}" eui-sort="ejs.Sort('Tag_Count').order(dashboard.sortOrder)"
+							ng-click="dashboard.selectedFilter = 'Tag_Count'; dashboard.sortOrder = dashboard.sortOrder == 'asc' ? 'desc': 'asc'"
+							eui-enabled="dashboard.filters[2] == dashboard.selectedFilter" ng-class="{sorting: dashboard.filters[2] == dashboard.selectedFilter}">
+							Tag Count
+							<span class="fa {{dashboard.filters[2] == dashboard.selectedFilter ? (dashboard.sortOrder == 'asc' ? 'fa-angle-up' : 'fa-angle-down') :'fa-angle-down'}}"></span>
 
-					</th>
-					<th
-						class="{{dashboard.filters[3] == dashboard.selectedFilter ? dashboard.sortOrder:''}}"
-						eui-sort="ejs.Sort('Size').order(dashboard.sortOrder)"
-						ng-click="dashboard.selectedFilter = 'Size'; dashboard.sortOrder = dashboard.sortOrder == 'asc' ? 'desc': 'asc'"
-						eui-enabled="dashboard.filters[3] == dashboard.selectedFilter"
-						ng-class="{sorting: dashboard.filters[3] == dashboard.selectedFilter}">
-						Size
-						<span class="fa {{dashboard.filters[3] == dashboard.selectedFilter ? (dashboard.sortOrder == 'asc' ? 'fa-angle-up' : 'fa-angle-down') :'fa-angle-down'}}"></span>
+						</th>
+						<th class="{{dashboard.filters[3] == dashboard.selectedFilter ? dashboard.sortOrder:''}}" eui-sort="ejs.Sort('Size').order(dashboard.sortOrder)"
+							ng-click="dashboard.selectedFilter = 'Size'; dashboard.sortOrder = dashboard.sortOrder == 'asc' ? 'desc': 'asc'" eui-enabled="dashboard.filters[3] == dashboard.selectedFilter"
+							ng-class="{sorting: dashboard.filters[3] == dashboard.selectedFilter}">
+							Size
+							<span class="fa {{dashboard.filters[3] == dashboard.selectedFilter ? (dashboard.sortOrder == 'asc' ? 'fa-angle-up' : 'fa-angle-down') :'fa-angle-down'}}"></span>
 
-					</th>
-					<th
-						class="{{dashboard.filters[4] == dashboard.selectedFilter ? dashboard.sortOrder:''}}"
-						eui-sort="ejs.Sort('Last_Accessed').order(dashboard.sortOrder)"
-						ng-click="dashboard.selectedFilter = 'Last_Modified'; dashboard.sortOrder = dashboard.sortOrder == 'asc' ? 'desc': 'asc'"
-						eui-enabled="dashboard.filters[4] == dashboard.selectedFilter"
-						ng-class="{sorting: dashboard.filters[4] == dashboard.selectedFilter}">
-						Last Modified
-						<span class="fa {{dashboard.filters[4] == dashboard.selectedFilter ? (dashboard.sortOrder == 'asc' ? 'fa-angle-up' : 'fa-angle-down') :'fa-angle-down'}}"></span>
+						</th>
+						<th class="{{dashboard.filters[4] == dashboard.selectedFilter ? dashboard.sortOrder:''}}" eui-sort="ejs.Sort('Last_Accessed').order(dashboard.sortOrder)"
+							ng-click="dashboard.selectedFilter = 'Last_Modified'; dashboard.sortOrder = dashboard.sortOrder == 'asc' ? 'desc': 'asc'"
+							eui-enabled="dashboard.filters[4] == dashboard.selectedFilter" ng-class="{sorting: dashboard.filters[4] == dashboard.selectedFilter}">
+							Last Modified
+							<span class="fa {{dashboard.filters[4] == dashboard.selectedFilter ? (dashboard.sortOrder == 'asc' ? 'fa-angle-up' : 'fa-angle-down') :'fa-angle-down'}}"></span>
 
-					</th>
-					<th><i class="fa fa-cog"></i></th>
-				</tr>
+						</th>
+						<th><i class="fa fa-cog"></i></th>
+					</tr>
 				</thead>
 				<tbody>
-				<tr ng-click="dashboard.selectTableRow($index);dashboard.selectedObject = item._source;dashboard.redrawGraph()"  ng-repeat="item in indexVM.results.hits.hits | limitTo: 50" ng-class="{'selected': $index == dashboard.selectedRow}">
-					<td>
-						<i class="fa" ng-class="{'fa-file': item._source.Type.toLowerCase() == 'file', 'fa-folder': item._source.Type.toLowerCase() == 'folder'}"></i>
-					</td>
-					<td>
-						<i class="fa fa-star"></i>
-					</td>
-					<td>{{item._source.Name}}</td>
-					<td>{{item._source.Path}}</td>
-					<td>
-						<span class="tag-count">{{item._source.Tag_Count}}</span>
-					</td>
-					<td>{{(item._source.Size | size) || 'N/A'}}</td>
-					<td>{{item._source.Last_Modified}}</td>
-					<td><i class="fa fa-cog"></i></td>
-				</tr>
+					<tr ng-click="dashboard.selectTableRow($index);dashboard.selectedObject = item._source;dashboard.redrawGraph()" ng-repeat="item in indexVM.results.hits.hits | limitTo: 50"
+						ng-class="{'selected': $index == dashboard.selectedRow}">
+						<td>
+							<a ui-sref="home.browse" ng-click="$event.stopPropagation()">
+								<i class="fa" ng-class="{'fa-file': item._source.Type.toLowerCase() == 'file', 'fa-folder': item._source.Type.toLowerCase() == 'folder'}"></i>
+							</a>
+						</td>
+						<td>
+							<i class="fa fa-star"></i>
+						</td>
+						<td>{{item._source.Name}}</td>
+						<td>{{item._source.Path}}</td>
+						<td>
+							<span class="tag-count">{{item._source.Tag_Count}}</span>
+						</td>
+						<td>{{(item._source.Size | size) || 'N/A'}}</td>
+						<td>{{item._source.Last_Modified}}</td>
+						<td><i class="fa fa-cog"></i></td>
+					</tr>
 				</tbody>
 			</table>
 			<div class="paginator">
@@ -278,7 +270,7 @@
 			<p ng-hide="indexVM.loading || indexVM.results.hits.hits.length > 0">No graph found.</p>
 
 			<div ng-hide="indexVM.loading || indexVM.results.hits.hits.length == 0">
-				<mermaid-graph mermaid="dashboard" is-edit-enabled="true"/>
+				<mermaid-graph mermaid="dashboard" is-edit-enabled="true" />
 			</div>
 
 		</div>

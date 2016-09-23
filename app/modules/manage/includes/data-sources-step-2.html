@@ -1,0 +1,82 @@
+<div>
+    <form role="form" name="manage.step2Form">
+        <h4 class="filter-head"> Step 2: Data Sources</h4>
+        <table class="stack data-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Tag</th>
+                    <th>Decription</th>
+                    <th>Data Type</th>
+                    <th>Status</th>
+                    <th>Domaine</th>
+                    <th>Ingestion Type</th>
+                    <th>Last Update</th>
+                    <th>Classification</th>
+                    <th>Data Steward</th>
+                    <th>Origin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="checkbox" />
+                    </td>
+                    <td>
+                        Source 1
+                    </td>
+                    <td>
+                        /data/source1
+                    </td>
+                    <td>Tag1</td>
+                    <td>this is description</td>
+                    <td>raw data</td>
+                    <td>POC</td>
+                    <td>quality</td>
+                    <td>batch</td>
+                    <td>21/09/2016</td>
+                    <td>A</td>
+                    <td>a196011</td>
+                    <td>sop</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" />
+                    </td>
+                    <td>
+                        Source 2
+                    </td>
+                    <td>
+                        /data/source2
+                    </td>
+                    <td>Tag1</td>
+                    <td>this is description</td>
+                    <td>raw data</td>
+                    <td>POC</td>
+                    <td>quality</td>
+                    <td>batch</td>
+                    <td>21/09/2016</td>
+                    <td>A</td>
+                    <td>a196011</td>
+                    <td>sop</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- Tabs section-->
+        <br/>
+        <div>
+            <br />
+            <tabset>
+                <tab ng-repeat="tab in manage.step2tabs" heading="{{tab.title}}" active="tab.active" ng-click="manage.handleTabClick()">
+                    <ng-include src="tab.content"></ng-include>
+                </tab>
+            </tabset>
+        </div>
+        <br />
+        <button type="submit" class="c-next-btn btn btn-default pull-right standard-button btn-full-width" ng-click="manage.isStep2Active = false; manage.isStep3Active=true">Next</button>
+        <button type="submit" class="c-prev-btn btn u-color--black btn-default pull-right standard-button btn-full-width" ng-click="manage.isStep2Active = false; manage.isStep1Active=true">Prev</button>
+
+    </form>
+</div>

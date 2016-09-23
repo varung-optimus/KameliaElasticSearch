@@ -29,6 +29,18 @@
                 content: "modules/manage/includes/tab-pipelines.html"
             }];
 
+        manage.step2tabs = [{
+            title: "Metadata",
+            content: "",
+            active: true
+        }, {
+                title: "Lineage",
+                content: ""
+            }, {
+                title: "Relations",
+                content: ""
+            }];
+
         manage.lineage = "graph LR \n A[fa:fa-building restaurants_inspection]-->B[fa:fa-file-excel-o restaurants_nyc.csv] \n B-.->C[fa:fa-bullseye restaurants_sep_2014_vc.csv] \n D[fa:fa-building nyc_open]-->E[fa:fa-file-excel-o NYPD_Motor_Vehicle_Collisions_2014.csv] \n E-.->C \n F[fa:fa-file-excel-o nyc.csv]-->G[fa:fa-file-excel-o inspections_sub_8.csv] \n G-->H[fa:fa-file-excel-o 8_8.csv] \n H-.->C \n";
         setTimeout(function () {
             manage.lineage = "graph LR \n A[fa:fa-building restaurants_inspection]-->B[fa:fa-file-excel-o restaurants_nyc.csv] \n B-.->C[fa:fa-bullseye restaurants_sep_2014_vc.csv] \n D[fa:fa-building nyc_open]-->E[fa:fa-file-excel-o NYPD_Motor_Vehicle_Collisions_2014.csv] \n E-.->C \n F[fa:fa-file-excel-o nyc.csv]-->G[fa:fa-file-excel-o inspections_sub_8.csv] \n G-->H[fa:fa-file-excel-o 8_8.csv] \n H-.->C \n";
@@ -164,31 +176,11 @@
             RadiusService.getGroup(
                 temp,
                 getGroupIdSuccessCallback);
-
-            // groupNameArr[groupNameArr.length - 1] = 'DEN';
-            // temp = groupNameArr.join('_');
-            // // Initialize Roles with clicked group id
-            // RadiusService.getGroup(
-            //     temp,
-            //     getGroupSuccessCallback);
-
-            // groupNameArr[groupNameArr.length - 1] = 'DST';
-            // temp = groupNameArr.join('_');
-            // // Initialize Roles with clicked group id
-            // RadiusService.getGroup(
-            //     temp,
-            //     getGroupSuccessCallback);
-
-            // groupNameArr[groupNameArr.length - 1] = 'CONS';
-            // temp = groupNameArr.join('_');
-            // // Initialize Roles with clicked group id
-            // RadiusService.getGroup(
-            //     temp,
-            //     getGroupSuccessCallback);
         }
 
         function onSuccessCallback(response) {
             manage.groups = response.data;
+            manage.step1Form.steward = $rootScope.loggedInUser.name;
             for (var groupIndex in response.data.vXGroups) {
                 // Fill other details
                 var item =
@@ -212,6 +204,7 @@
                     manage.groups.vXGroups[groupIndex].domain = 'DataLake Commerce';
                 } else if (domain === 'VVV') {
                     manage.groups.vXGroups[groupIndex].domain = 'DataLab';
+                    manage.belongsToVVV = true;
                 } else {
                     manage.groups.vXGroups[groupIndex].domain = domain;
                 }
@@ -233,8 +226,8 @@
 
         // Get User groups from user id
         RadiusService.getUserGroups(
-            // $rootScope.loggedInUser.id,
-            37,
+            $rootScope.loggedInUser.id,
+            // 37,
             onSuccessCallback);
     }
 
