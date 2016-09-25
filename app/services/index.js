@@ -11,7 +11,8 @@
             USER_GROUPS: '/service/xusers/{userId}/groups',
             GROUP_POLICIES: '/service/public/api/policy?groupName={groupName}',
             GROUP_MEMBERS: '/service/xusers/{groupId}/users',
-            GROUP: '/service/xusers/groups?name={groupName}'
+            GROUP: '/service/xusers/groups?name={groupName}',
+            ALL_USERS: '/service/xusers/users'
         };
 
         var METHODS = {
@@ -89,6 +90,20 @@
             var req = {
                 method: METHODS.GET,
                 url: API.GROUP_MEMBERS.replace('{groupId}', groupId)
+            }
+            $http(req)
+                .then(
+                onSuccessCallback,
+                function (response) {
+                    console.log(response);
+                    toastr.error(response.data.message);
+                });
+        };
+
+        this.getAllUsers = function (onSuccessCallback) {
+            var req = {
+                method: METHODS.GET,
+                url: API.ALL_USERS
             }
             $http(req)
                 .then(

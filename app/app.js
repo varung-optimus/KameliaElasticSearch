@@ -68,5 +68,6 @@
     'LocalStorageModule',
     'ngAnimate',
     'toastr',
-    'base64'
+    'base64',
+    'oi.select'
 ]));

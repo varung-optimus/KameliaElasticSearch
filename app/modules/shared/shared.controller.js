@@ -2,11 +2,11 @@
 
     app.controller('SharedController', SharedController);
     SharedController.$inject = ['$scope', '$timeout', '$mdSidenav', 'esClient',
-        'euiContentTypeQuery', 'euiAccessQuery', 'euiModificationsQuery'
+        'euiContentTypeQuery', 'euiAccessQuery', 'euiModificationsQuery', '$rootScope', '$state'
     ];
 
     function SharedController($scope, $timeout, $mdSidenav, esClient,
-        euiContentTypeQuery, euiAccessQuery, euiModificationsQuery) {
+        euiContentTypeQuery, euiAccessQuery, euiModificationsQuery, $rootScope, $state) {
         var shared = this;
         var isRendered = false;
 
@@ -14,6 +14,11 @@
             var popup = new Foundation.Reveal($('#popup-modal'));
             popup.open();
         };
+
+        $rootScope.signout = function() {
+            $rootScope.isAuthenticated = false;
+            $state.go('home.auth');
+        }
 
         shared.toggleLeft = buildDelayedToggler('left');
         shared.toggleRight = buildToggler('right');

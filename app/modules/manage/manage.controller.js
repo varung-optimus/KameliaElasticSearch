@@ -180,7 +180,7 @@
 
         function onSuccessCallback(response) {
             manage.groups = response.data;
-            manage.step1Form.steward = $rootScope.loggedInUser.name;
+            manage.step1Form.steward = $rootScope.loggedInUser ? $rootScope.loggedInUser.name : '';
             for (var groupIndex in response.data.vXGroups) {
                 // Fill other details
                 var item =
@@ -224,11 +224,18 @@
             console.log(manage.groups);
         }
 
+        function onGetAllUsersSuccessCallback(resp) {
+            manage.step1Form.usersList = resp.data.vXUsers;
+        }
+
         // Get User groups from user id
         RadiusService.getUserGroups(
-            $rootScope.loggedInUser.id,
-            // 37,
+            // $rootScope.loggedInUser.id,
+            37,
             onSuccessCallback);
+
+        // Get all users
+        RadiusService.getAllUsers(onGetAllUsersSuccessCallback)
     }
 
 })(angular.module('core.manage.controller', []));

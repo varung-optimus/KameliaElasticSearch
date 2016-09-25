@@ -1434,3 +1434,8 @@ input[type="button"].btn-block {
     color: #d9534f;
     font-style: italic;
 }
+
+a:hover,
+a:active {
+    text-decoration: none !important;
+}

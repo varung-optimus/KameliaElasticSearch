@@ -4,8 +4,10 @@
         <!-- Name -->
         <div class="u-display-flex">
             <label class="large-2">Name</label>
-            <input class="form-control" placeholder="Name" type="text" ng-model="create.step1.name" required name="name" ng-minlength="5"
+            <span class="large-10">
+                <input class="form-control" placeholder="Name" type="text" ng-model="create.step1.name" required name="name" ng-minlength="5"
                 ng-maxlength="10">
+            </span>
         </div>
         <div ng-show="manage.step1Form.name.$error.required && manage.step1Form.name.$dirty" class="text-right large-12 alert alert-danger"
             role="alert">
@@ -29,8 +31,10 @@
         <!-- Description -->
         <div class="u-display-flex">
             <label class="large-2">Description</label>
-            <textarea placeholder="Description" ng-model="create.step1.desc" name="desc" required ng-minlength="250" mg-maxlength="1000">
-            </textarea>
+            <span class="large-10">
+                <textarea placeholder="Description" ng-model="create.step1.desc" name="desc" required ng-minlength="250" mg-maxlength="1000">
+                </textarea>
+            </span>
         </div>
         <div ng-show="manage.step1Form.desc.$error.required && manage.step1Form.desc.$dirty" class="text-right large-12 alert alert-danger"
             role="alert">
@@ -54,39 +58,47 @@
         <!-- Status -->
         <div class="u-display-flex">
             <label class="large-2">Status</label>
-            <select class="form-control" ng-if="manage.belongsToVVV" ng-model="manage.step1Form.status">
-                <option value="">Select Status</option>
-                <option value="POC">POC</option>
-            </select>
-            <select class="form-control" ng-if="!manage.belongsToVVV" ng-model="manage.step1Form.status">
-                <option value="">Select Status</option>
-                <option value="EXPLO">EXPLO</option>
-                <option value="PROD">PROD</option>
-            </select>
+            <span class="large-10">
+                <select class="form-control" ng-if="manage.belongsToVVV" ng-model="manage.step1Form.status">
+                    <option value="">Select Status</option>
+                    <option value="POC">POC</option>
+                </select>
+                <select class="form-control" ng-if="!manage.belongsToVVV" ng-model="manage.step1Form.status">
+                    <option value="">Select Status</option>
+                    <option value="EXPLO">EXPLO</option>
+                    <option value="PROD">PROD</option>
+                </select>
+            <span>
         </div>
 
         <!-- Domaine -->
         <div class="u-display-flex">
             <label class="large-2">Domaine</label>
-            <select class="form-control" ng-if="manage.belongsToVVV">
-                <option value="">Select Domaine</option>
-                <option value="Datalab">Datalab</option>
-            </select>
-            <select class="form-control" ng-if="!manage.belongsToVVV">
-                <option value="">Select Domaine</option>
-                <option value="Quality">Quality</option>
-                <option value="Commerce">Commerce</option>
-            </select>
+            <span class="large-10">
+                <select class="form-control" ng-if="manage.belongsToVVV">
+                    <option value="">Select Domaine</option>
+                    <option value="Datalab">Datalab</option>
+                </select>
+                <select class="form-control" ng-if="!manage.belongsToVVV">
+                    <option value="">Select Domaine</option>
+                    <option value="Quality">Quality</option>
+                    <option value="Commerce">Commerce</option>
+                </select>
+            </span>
         </div>
 
         <!-- CPI -->
         <div class="u-display-flex" ng-if="manage.step1Form.status !== 'PROD'">
             <label class="large-2">CPI</label>
-            <input type="text" class="form-control" disabled="disabled" name="cpi" placeholder="CPI">
+            <span class="large-10">
+                <input type="text" class="form-control" disabled="disabled" name="cpi" placeholder="CPI">
+            </span>
         </div>
         <div class="u-display-flex" ng-if="manage.step1Form.status === 'PROD'">
             <label class="large-2">CPI</label>
-            <input type="text" class="form-control" ng-model="manage.step1Form.cpi" required name="cpi" placeholder="CPI">
+            <span class="large-10">
+                <input type="text" class="form-control" ng-model="manage.step1Form.cpi" required name="cpi" placeholder="CPI">
+            </span>
         </div>
         <div ng-show="manage.step1Form.cpi.$error.required && manage.step1Form.cpi.$dirty" class="text-right large-12 alert alert-danger"
             role="alert">
@@ -98,15 +110,36 @@
         <!-- Data Steward -->
         <div class="u-display-flex">
             <label class="large-2">Data Steward</label>
-            <input type="text" class="form-control" placeholder="Data Steward" required ng-model="manage.step1Form.steward">
+            <span class="large-10"> 
+                <oi-select
+                    oi-options="item.name for item in manage.step1Form.usersList"
+                    ng-model="manage.step1Form.stewards"
+                    multiple
+                    placeholder="Select Stewards"></oi-select>
+                <br/>
+            </span>
         </div>
         <div class="u-display-flex">
             <label class="large-2">Data Scientists</label>
-            <input type="text" class="form-control" placeholder="Data Scientists" required ng-model="manage.step1Form.scientists">
+            <span class="large-10">
+                <oi-select
+                    oi-options="item.name for item in manage.step1Form.usersList"
+                    ng-model="manage.step1Form.scientists"
+                    multiple
+                    placeholder="Select Scientists"></oi-select>
+                <br/>
+            </span>
         </div>
         <div class="u-display-flex">
             <label class="large-2">Data Engineers</label>
-            <input type="text" class="form-control" placeholder="Data Engineers" required ng-model="manage.step1Form.engineers">
+            <span class="large-10">
+                <oi-select
+                    oi-options="item.name for item in manage.step1Form.usersList"
+                    ng-model="manage.step1Form.engineers"
+                    multiple
+                    placeholder="Select Engineers"></oi-select>
+                <br/>
+            </span>
         </div>
         <button type="submit" class="c-next-btn btn btn-default pull-right standard-button btn-full-width" ng-click="manage.isStep1Active = false; manage.isStep2Active=true">Next</button>
     </form>

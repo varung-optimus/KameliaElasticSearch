@@ -81,6 +81,24 @@
 			<div ng-show="!manage.isNewDataUsage">
 				<a class="button u-color--black tiny round" ng-click="manage.isNewDataUsage=true">Create New Data Usage</a>
 
+				<div class="row">
+					<div class="large-6 pull-left">
+						<select class="form-control" ng-model="manage.sortName">
+							<option value="">Order By</option>
+							<option value="subject">Data Usage</option>
+							<option value="permission">Permission</option>
+							<option value="instance">Status</option>
+							<option value="domain">Domain</option>
+						</select>
+					</div>
+					<div class="large-5 pull-right">
+						<select class="form-control" ng-model="manage.sortOrder">
+							<option value="">ASC</option>
+							<option value="true">DESC</option>
+						</select>
+					</div>
+				</div>
+
 				<table class="stack data-table">
 					<thead>
 						<tr>
@@ -93,7 +111,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="group in manage.groups.vXGroups | filter:manage.search" ng-click="manage.handleDetailPanelVisibility(group)">
+						<tr ng-repeat="group in manage.groups.vXGroups | orderBy:manage.sortName:manage.sortOrder | filter:manage.search" ng-click="manage.handleDetailPanelVisibility(group)">
 							<td>
 								{{group.subject}}
 							</td>

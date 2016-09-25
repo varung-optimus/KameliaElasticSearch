@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://use.fontawesome.com/22f63988f2.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="assets/jstree/dist/themes/default/style.css">
@@ -18,6 +19,7 @@
     <link rel="stylesheet" href="./bower_components/mermaid/dist/mermaid.css" />
     <link rel="stylesheet" href="./bower_components/angular-ui-tree/dist/angular-ui-tree.min.css">
     <link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css" />
+    <link rel="stylesheet" href="./bower_components/oi.select/dist/select.css">
     <link rel="stylesheet" href="app.css">
 </head>
 
@@ -58,10 +60,13 @@
             </ul>
         </div>
         <div class="top-bar-right">
-            <!--<ul class="menu">-->
-            <!--<li><input type="search" placeholder="Search"></li>-->
-            <!--<li><button type="button" class="button">Search</button></li>-->
-            <!--</ul>-->
+            <ul class="menu">
+                <li ui-sref-active="active" ng-if="isAuthenticated">
+                    <a ng-click="signout()" href="">
+                        <i class="fa fa-sign-out"></i> Sign out
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 
@@ -79,7 +84,7 @@
     <script src="./bower_components/angular/angular.js"></script>
     <script src="./bower_components/angular-aria/angular-aria.js"></script>
     <script src="./bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="./bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script> 
+    <script src="./bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
     <script src="./bower_components/angular-animate/angular-animate.js"></script>
     <script src="./bower_components/angular-material/angular-material.js"></script>
     <script src="./bower_components/foundation-sites/dist/foundation.min.js"></script>
@@ -97,7 +102,7 @@
     <script src="./bower_components/elasticui/dist/elasticui.js"></script>
     <script src="./bower_components/moment/moment.js"></script>
     <script src="./bower_components/angular-base64/angular-base64.js"></script>
-
+    <script src="./bower_components/oi.select/dist/select.js"></script>
     <script src="app.js"></script>
 
     <script src="modules/shared/shared.js"></script>
@@ -124,7 +129,7 @@
 
     <!-- Tree -->
     <script src="assets/jstree/dist/jstree.min.js"></script>
-    <script src="bower_components/ng-js-tree/ngJsTree.js"/>
+    <script src="bower_components/ng-js-tree/ngJsTree.js" />
     <!-- End -->
     <script>
         jQuery(document).ready(function($) {
