@@ -74,11 +74,11 @@
 
         manage.tabs = [{
             title: "HDFS",
-            content: "",
+            content: "modules/manage/includes/tab-hdfs.html",
             active: true
         }, {
                 title: "Hive",
-                content: ""
+                content: "modules/manage/includes/tab-hive.html"
             }, {
                 title: "Roles",
                 content: "modules/manage/includes/tab-roles.html"

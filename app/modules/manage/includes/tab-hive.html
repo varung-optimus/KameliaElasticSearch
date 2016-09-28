@@ -1,0 +1,66 @@
+<form role="form" name="manage.step2Form">
+    <div ng-hide="indexVM.loading || indexVM.results.hits.hits.length == 0">
+        <table class="stack data-table data-table-tab-fields" id="fieldsTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Level Access</th>
+                    <th>Location</th>
+                    <th>Tag</th>
+                    <th>Decription</th>
+                    <th>Data Type</th>
+                    <th>Status</th>
+                    <th>Domaine</th>
+                    <th>Velocity</th>
+                    <th>Last Update</th>
+                    <th>Classification</th>
+                    <th>Data Steward</th>
+                    <th>Origin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in manage.testIndexData | limitTo: 50">
+                    <td>
+                        {{item._source.Name}}
+                    </td>
+                    <td>
+                        {{item._source.Level_Access}}
+                    </td>
+                    <td>
+                        {{item._source.Location}}
+                    </td>
+                    <td>
+                        {{item._source.Tag}}
+                    </td>
+                    <td>
+                        {{item._source.Description}}
+                    </td>
+                    <td>
+                        {{item._source.Data_Type}}
+                    </td>
+                    <td>
+                        {{item._source.Status}}
+                    </td>
+                    <td>
+                        {{item._source.Domaine}}
+                    </td>
+                    <td>
+                        {{item._source.Velocity}}
+                    </td>
+                    <td>
+                        {{item._source.Last_Update}}
+                    </td>
+                    <td>
+                        {{item._source.Classification}}
+                    </td>
+                    <td>
+                        {{item._source.Data_Steward}}
+                    </td>
+                    <td>
+                        {{item._source.Origin}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>

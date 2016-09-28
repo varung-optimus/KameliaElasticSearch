@@ -150,7 +150,7 @@
 			
 
 			<!-- Tabs section-->
-			<div ng-show="manage.view.groupDetailPanelVisibility && !manage.isNewDataUsage">
+			<div style="overflow: auto" ng-show="manage.view.groupDetailPanelVisibility && !manage.isNewDataUsage">
 				<br />
 				<tabset>
 					<tab ng-repeat="tab in manage.tabs" heading="{{tab.title}}" active="tab.active" ng-click="manage.handleTabClick()">
