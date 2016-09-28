@@ -5,14 +5,28 @@
     function ManageController($scope, RadiusService, $rootScope, esClient, sourcesTagQuery) {
         var manage = this;
         var groupDict = [];
-
         manage.view = {};
         manage.view.hdfs = true;
         manage.view.hive = true;
         manage.view.kafka = true;
+        manage.rowsToDisplay = [];
         manage.view.resource = 'my';
         manage.view.groupDetailPanelVisibility = false;
         manage.handleDetailPanelVisibility = handleDetailPanelVisibility;
+
+        manage.rowsToGetDataFrom = function (index) {
+            if (manage.checkbox[index] === true) {
+                manage.rowsToDisplay.push(manage.testIndexData[index]);
+            }
+            if (manage.checkbox[index] === false) {
+                manage.rowsToDisplay = manage.rowsToDisplay.filter(function (obj) {
+                    return manage.testIndexData[index]._id !== obj._id;
+                });
+            }
+        }
+
+        manage.testIndexData
+
         manage.getPages = function () {
             var tmp = [];
             for (var i = 1; i < $scope.indexVM.pageCount; i++)
@@ -60,11 +74,11 @@
 
         manage.tabs = [{
             title: "HDFS",
-            content: "",
+            content: "modules/manage/includes/tab-hdfs.html",
             active: true
         }, {
                 title: "Hive",
-                content: ""
+                content: "modules/manage/includes/tab-hive.html"
             }, {
                 title: "Roles",
                 content: "modules/manage/includes/tab-roles.html"
@@ -266,9 +280,13 @@
             // Prepare dictionary of connections
             for (var item in edges) {
                 var name = searchNameInAtlasEntities(item);
+                var icon = 'gear';
 
+                if (name.indexOf('table') !== -1) {
+                    icon = 'table';
+                }
                 manage.atlasLineageConnects[item] = {
-                    icon: 'gear',
+                    icon: icon,
                     name: name,
                     connections: []
                 };

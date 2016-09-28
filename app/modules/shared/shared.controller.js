@@ -14,8 +14,13 @@
             var popup = new Foundation.Reveal($('#popup-modal'));
             popup.open();
         };
+        $(window).on('beforeunload', function () {
+            if($rootScope.isAuthenticated === false) {
+                $state.go('home.auth');
+            }
+        });
 
-        $rootScope.signout = function() {
+         $rootScope.signout = function() {
             $rootScope.isAuthenticated = false;
             $state.go('home.auth');
         }
