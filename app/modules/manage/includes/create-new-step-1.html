@@ -141,6 +141,6 @@
                 <br/>
             </span>
         </div>
-        <button type="submit" class="c-next-btn btn btn-default pull-right standard-button btn-full-width" ng-click="manage.isStep1Active = false; manage.isStep2Active=true">Next</button>
+        <button ng-disabled="manage.step1Form.$invalid"  type="submit" class="c-next-btn btn btn-default pull-right standard-button btn-full-width" ng-click="manage.isStep1Active = false; manage.isStep2Active=true">Next</button>
     </form>
 </div>

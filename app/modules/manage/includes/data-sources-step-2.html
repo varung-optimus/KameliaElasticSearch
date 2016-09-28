@@ -1,7 +1,6 @@
 <div class="search-box">
     <div class="input-group">
-        <input class="input-group-field" 
-            placeholder="Search.." type="text">
+        <input class="input-group-field" placeholder="Search.." type="text">
         <div class="input-group-button">
             <button class="button"><i class="fa fa-search"></i></button>
         </div>
@@ -32,7 +31,7 @@
             <tbody>
                 <tr ng-repeat="item in manage.testIndexData | limitTo: 50">
                     <td>
-                        <input type="checkbox" />
+                        <input type="checkbox" ng-model="manage.checkbox[$index]" ng-click="manage.rowsToGetDataFrom($index)"/>
                     </td>
                     <td>
                         {{item._source.Name}}

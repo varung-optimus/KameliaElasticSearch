@@ -5,16 +5,29 @@
     function ManageController($scope, RadiusService, $rootScope, esClient, sourcesTagQuery) {
         var manage = this;
         var groupDict = [];
-
         manage.view = {};
         manage.view.hdfs = true;
         manage.view.hive = true;
         manage.view.kafka = true;
+        manage.rowsToDisplay = [];
         manage.view.resource = 'my';
         manage.view.groupDetailPanelVisibility = false;
         manage.handleDetailPanelVisibility = handleDetailPanelVisibility;
-        manage.getPages = function() {
-            debugger
+        
+        manage.rowsToGetDataFrom = function(index) {
+            if (manage.checkbox[index] === true) {
+                manage.rowsToDisplay.push(manage.testIndexData[index]);
+            }
+            if (manage.checkbox[index] === false) {
+                manage.rowsToDisplay = manage.rowsToDisplay.filter(function(obj) {
+                    return manage.testIndexData[index]._id !== obj._id;
+                });
+            }
+        }
+        
+        manage.testIndexData
+
+        manage.getPages = function () {
             var tmp = [];
             for (var i = 1; i < $scope.indexVM.pageCount; i++)
                 tmp.push(i);
@@ -27,11 +40,11 @@
             console.trace(err.message);
         });
         $scope.$watch('indexVM.loading', function(newVal, oldVal) {
-			if (newVal) {
-				manage.selectedObject = null;
-				manage.selectedRow = null;
-			}
-		});
+            if (newVal) {
+                manage.selectedObject = null;
+                manage.selectedRow = null;
+            }
+        });
         function _refineFieldTabData(resp) {
             if (!$scope.indexVM.results) {
                 setTimeout(function() {
@@ -58,7 +71,7 @@
                 }
             }
         }
-        
+
         manage.tabs = [{
             title: "HDFS",
             content: "",
@@ -226,7 +239,6 @@
         function onSuccessCallback(response) {
             manage.groups = response.data;
             manage.step1Form.steward = $rootScope.loggedInUser ? $rootScope.loggedInUser.name : '';
-            debugger
             for (var groupIndex in response.data.vXGroups) {
                 // Fill other details
                 var item =
@@ -272,7 +284,6 @@
 
         function onGetAllUsersSuccessCallback(resp) {
             manage.step1Form.usersList = resp.data.vXUsers;
-            debugger
         }
 
         // Get User groups from user id

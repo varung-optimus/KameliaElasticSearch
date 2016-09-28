@@ -53,35 +53,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr ng-repeat="item in manage.rowsToDisplay | limitTo: 50">
                         <td>
-                            dataSource1
+                            {{item._source.Name}}
                         </td>
                         <td>
-                            /data/source1
-                        </td>
-                        <td>Tag1</td>
-                        <td>a196011</td>
-                    </tr>
-                     <tr>
-                        <td>
-                            dataSource2
+                            {{item._source.Location}}
                         </td>
                         <td>
-                            /data/source2
-                        </td>
-                        <td>Tag2</td>
-                        <td>a196011</td>
-                    </tr>
-                     <tr>
-                        <td>
-                            dataSource3
+                            {{item._source.Tag}}
                         </td>
                         <td>
-                            /data/source3
+                            {{item._source.Data_Steward}}
                         </td>
-                        <td>Tag3</td>
-                        <td>a196011</td>
                     </tr>
                 </tbody>
             </table>
