@@ -1,18 +1,28 @@
-<div>
-    <form role="form" name="manage.step2Form">
-        <h4 class="filter-head"> Step 2: Data Sources</h4>
-        <table class="stack data-table">
+<div class="search-box">
+    <div class="input-group">
+        <input class="input-group-field" 
+            placeholder="Search.." type="text">
+        <div class="input-group-button">
+            <button class="button"><i class="fa fa-search"></i></button>
+        </div>
+    </div>
+</div>
+<form role="form" name="manage.step2Form">
+    <h4 class="filter-head"> Step 2: Data Sources</h4>
+    <div ng-hide="indexVM.loading || indexVM.results.hits.hits.length == 0">
+        <table class="stack data-table data-table-tab-fields" id="fieldsTable">
             <thead>
                 <tr>
                     <th></th>
                     <th>Name</th>
+                    <th>Level Access</th>
                     <th>Location</th>
                     <th>Tag</th>
                     <th>Decription</th>
                     <th>Data Type</th>
                     <th>Status</th>
                     <th>Domaine</th>
-                    <th>Ingestion Type</th>
+                    <th>Velocity</th>
                     <th>Last Update</th>
                     <th>Classification</th>
                     <th>Data Steward</th>
@@ -20,63 +30,63 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr ng-repeat="item in manage.testIndexData | limitTo: 50">
                     <td>
                         <input type="checkbox" />
                     </td>
                     <td>
-                        Source 1
+                        {{item._source.Name}}
                     </td>
                     <td>
-                        /data/source1
-                    </td>
-                    <td>Tag1</td>
-                    <td>this is description</td>
-                    <td>raw data</td>
-                    <td>POC</td>
-                    <td>quality</td>
-                    <td>batch</td>
-                    <td>21/09/2016</td>
-                    <td>A</td>
-                    <td>a196011</td>
-                    <td>sop</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" />
+                        {{item._source.Level_Access}}
                     </td>
                     <td>
-                        Source 2
+                        {{item._source.Location}}
                     </td>
                     <td>
-                        /data/source2
+                        {{item._source.Tag}}
                     </td>
-                    <td>Tag1</td>
-                    <td>this is description</td>
-                    <td>raw data</td>
-                    <td>POC</td>
-                    <td>quality</td>
-                    <td>batch</td>
-                    <td>21/09/2016</td>
-                    <td>A</td>
-                    <td>a196011</td>
-                    <td>sop</td>
+                    <td>
+                        {{item._source.Description}}
+                    </td>
+                    <td>
+                        {{item._source.Data_Type}}
+                    </td>
+                    <td>
+                        {{item._source.Status}}
+                    </td>
+                    <td>
+                        {{item._source.Domaine}}
+                    </td>
+                    <td>
+                        {{item._source.Velocity}}
+                    </td>
+                    <td>
+                        {{item._source.Last_Update}}
+                    </td>
+                    <td>
+                        {{item._source.Classification}}
+                    </td>
+                    <td>
+                        {{item._source.Data_Steward}}
+                    </td>
+                    <td>
+                        {{item._source.Origin}}
+                    </td>
                 </tr>
             </tbody>
         </table>
-        <!-- Tabs section-->
-        <br/>
-        <div>
-            <br />
-            <tabset>
-                <tab ng-repeat="tab in manage.step2tabs" heading="{{tab.title}}" active="tab.active" ng-click="manage.handleTabClick()">
-                    <ng-include src="tab.content"></ng-include>
-                </tab>
-            </tabset>
-        </div>
+    </div>
+    <br/>
+    <div>
         <br />
-        <button type="submit" class="c-next-btn btn btn-default pull-right standard-button btn-full-width" ng-click="manage.isStep2Active = false; manage.isStep3Active=true">Next</button>
-        <button type="submit" class="c-prev-btn btn u-color--black btn-default pull-right standard-button btn-full-width" ng-click="manage.isStep2Active = false; manage.isStep1Active=true">Prev</button>
-
-    </form>
-</div>
+        <tabset>
+            <tab ng-repeat="tab in manage.step2tabs" heading="{{tab.title}}" active="tab.active" ng-click="manage.handleTabClick()">
+                <ng-include src="tab.content"></ng-include>
+            </tab>
+        </tabset>
+    </div>
+    <br />
+    <button type="submit" class="c-next-btn btn btn-default pull-right standard-button btn-full-width" ng-click="manage.isStep2Active = false; manage.isStep3Active=true">Next</button>
+    <button type="submit" class="c-prev-btn btn u-color--black btn-default pull-right standard-button btn-full-width" ng-click="manage.isStep2Active = false; manage.isStep1Active=true">Prev</button>
+</form>

@@ -7,35 +7,36 @@
                 Summary of the request
             </label>
             <label>
-                Name: admin
+                Name: {{manage.step1Form.name.$modelValue}}
             </label>
             <br/>
             <label>
-                Description: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                Description: {{manage.step1Form.desc.$modelValue}}
+            <label>
+                Status: {{manage.step1Form.status}}
             </label>
             <br/>
             <label>
-                Status: PROD
+                Domaine: {{manage.step1Form.domaine}}
             </label>
             <br/>
             <label>
-                Domaine: Datalab
+                CPI: {{manage.step1Form.status !== 'PROD'? 'CPI': manage.step1Form.cpi}}
             </label>
             <br/>
             <label>
-                CPI: cpi
+                Data stewards: 
+                <span ng-repeat="steward in manage.step1Form.stewards">{{steward.name}}<span ng-show="$index < manage.step1Form.stewards.length-1 ">, </span></span>
             </label>
             <br/>
             <label>
-                Data Steward: user1, user2, user3
+                Data Scientists: 
+                <span ng-repeat="scientist in manage.step1Form.scientists">{{scientist.name}}<span ng-show="$index < manage.step1Form.scientists.length-1 ">, </span></span>
             </label>
             <br/>
             <label>
-                Data Scientists: user1, user2, user3
-            </label>
-            <br/>
-            <label>
-                Data Engineers: user1, user2, user3
+                Data Engineers:
+                <span ng-repeat="engineer in manage.step1Form.engineers">{{engineer.name}}<span ng-show="$index < manage.step1Form.engineers.length-1 ">, </span></span>
             </label>
             <br/>
             <label class="filter-head">

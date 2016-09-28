@@ -75,11 +75,11 @@
         <div class="u-display-flex">
             <label class="large-2">Domaine</label>
             <span class="large-10">
-                <select class="form-control" ng-if="manage.belongsToVVV">
+                <select class="form-control" ng-if="manage.belongsToVVV" ng-model="manage.step1Form.domaine">
                     <option value="">Select Domaine</option>
                     <option value="Datalab">Datalab</option>
                 </select>
-                <select class="form-control" ng-if="!manage.belongsToVVV">
+                <select class="form-control" ng-if="!manage.belongsToVVV" ng-model="manage.step1Form.domaine">
                     <option value="">Select Domaine</option>
                     <option value="Quality">Quality</option>
                     <option value="Commerce">Commerce</option>

@@ -172,6 +172,12 @@
             size: 1000
         }
     };
+    var sourcesTagQuery = {
+        index: 'sources',
+        body: {
+            size: 1000
+        }
+    };
 
     app.constant('euiHost', 'http://41.106.2.2:9200');
     app.constant('euiContentTypeQuery', contentTypeQuery);
@@ -180,4 +186,5 @@
     app.constant('euiTagQuery', tagQuery);
     app.constant('euiSaveQuery', saveQuery);
     app.constant('euiBrowseTagQuery', browseTagQuery);
+    app.constant('sourcesTagQuery', sourcesTagQuery);
 })(angular.module('core.constants', []));

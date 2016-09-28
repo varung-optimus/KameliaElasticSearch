@@ -1,8 +1,8 @@
 (function (app) {
     app.controller('ManageController', ManageController);
-    ManageController.$inject = ['$scope', 'RadiusService', '$rootScope'];
+    ManageController.$inject = ['$scope', 'RadiusService', '$rootScope', 'esClient', 'sourcesTagQuery'];
 
-    function ManageController($scope, RadiusService, $rootScope) {
+    function ManageController($scope, RadiusService, $rootScope, esClient, sourcesTagQuery) {
         var manage = this;
         var groupDict = [];
 
@@ -13,7 +13,52 @@
         manage.view.resource = 'my';
         manage.view.groupDetailPanelVisibility = false;
         manage.handleDetailPanelVisibility = handleDetailPanelVisibility;
+        manage.getPages = function() {
+            debugger
+            var tmp = [];
+            for (var i = 1; i < $scope.indexVM.pageCount; i++)
+                tmp.push(i);
+            return tmp;
+        };
 
+        esClient.search(sourcesTagQuery).then(function(resp) {
+            _refineFieldTabData(resp);
+        }, function(err) {
+            console.trace(err.message);
+        });
+        $scope.$watch('indexVM.loading', function(newVal, oldVal) {
+			if (newVal) {
+				manage.selectedObject = null;
+				manage.selectedRow = null;
+			}
+		});
+        function _refineFieldTabData(resp) {
+            if (!$scope.indexVM.results) {
+                setTimeout(function() {
+                    _refineFieldTabData(resp);
+                }, resp, 100);
+            } else {
+                manage.metadata = $scope.indexVM.results.hits.hits;
+                // Create tag dictionary
+                manage.testIndexData = resp.hits.hits;
+                manage.tagsDict = [];
+                for (var index = 0; index < manage.testIndexData.length; index++) {
+                    var currentItem = manage.testIndexData[index];
+                    manage.tagsDict[index] = currentItem;
+                }
+
+                // For each tag in data, get corresponding tag
+                for (var index = 0; index < manage.metadata.length; index++) {
+                    var currentItem = manage.metadata[index]._source;
+                    currentItem.mappedTags = [];
+                    for (var tag_index = 0; tag_index < currentItem.tags.length; tag_index++) {
+                        var tagItem = manage.tagsDict[currentItem.tags[tag_index].tag_id];
+                        currentItem.mappedTags.push(tagItem._source.Name);
+                    }
+                }
+            }
+        }
+        
         manage.tabs = [{
             title: "HDFS",
             content: "",
@@ -181,6 +226,7 @@
         function onSuccessCallback(response) {
             manage.groups = response.data;
             manage.step1Form.steward = $rootScope.loggedInUser ? $rootScope.loggedInUser.name : '';
+            debugger
             for (var groupIndex in response.data.vXGroups) {
                 // Fill other details
                 var item =
@@ -226,6 +272,7 @@
 
         function onGetAllUsersSuccessCallback(resp) {
             manage.step1Form.usersList = resp.data.vXUsers;
+            debugger
         }
 
         // Get User groups from user id
