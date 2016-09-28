@@ -1439,3 +1439,7 @@ a:hover,
 a:active {
     text-decoration: none !important;
 }
+
+#mermaidChart1 {
+    max-width: 100% !important;
+}

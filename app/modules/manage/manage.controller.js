@@ -13,28 +13,27 @@
         manage.view.resource = 'my';
         manage.view.groupDetailPanelVisibility = false;
         manage.handleDetailPanelVisibility = handleDetailPanelVisibility;
-        manage.getPages = function() {
-            debugger
+        manage.getPages = function () {
             var tmp = [];
             for (var i = 1; i < $scope.indexVM.pageCount; i++)
                 tmp.push(i);
             return tmp;
         };
 
-        esClient.search(sourcesTagQuery).then(function(resp) {
+        esClient.search(sourcesTagQuery).then(function (resp) {
             _refineFieldTabData(resp);
-        }, function(err) {
+        }, function (err) {
             console.trace(err.message);
         });
-        $scope.$watch('indexVM.loading', function(newVal, oldVal) {
-			if (newVal) {
-				manage.selectedObject = null;
-				manage.selectedRow = null;
-			}
-		});
+        $scope.$watch('indexVM.loading', function (newVal, oldVal) {
+            if (newVal) {
+                manage.selectedObject = null;
+                manage.selectedRow = null;
+            }
+        });
         function _refineFieldTabData(resp) {
             if (!$scope.indexVM.results) {
-                setTimeout(function() {
+                setTimeout(function () {
                     _refineFieldTabData(resp);
                 }, resp, 100);
             } else {
@@ -58,7 +57,7 @@
                 }
             }
         }
-        
+
         manage.tabs = [{
             title: "HDFS",
             content: "",
@@ -80,7 +79,7 @@
             active: true
         }, {
                 title: "Lineage",
-                content: ""
+                content: "modules/manage/includes/lineage.html"
             }, {
                 title: "Relations",
                 content: ""
@@ -223,10 +222,84 @@
                 getGroupIdSuccessCallback);
         }
 
+        function searchNameInAtlasEntities(item) {
+            for (var index in manage.atlasEntities) {
+                if (manage.atlasEntities[index].id === item) {
+                    return manage.atlasEntities[index].name;
+                }
+            }
+        }
+
+        function prepareLineageGraphModel(atlasLineageConnects) {
+            manage.lineage = "graph LR";
+            var index = 0;
+            var separator = '\n';
+            var connect = '-->';
+            var registeredNodesDict = [];
+            for (var item in atlasLineageConnects) {
+                var nodeItem = atlasLineageConnects[item];
+                var nodeId = registeredNodesDict[item] ? registeredNodesDict[item] : ++index;
+                registeredNodesDict[item] = nodeId;
+
+                var nodeName = nodeId + '[fa:fa-' + nodeItem.icon +
+                    ' ' + nodeItem.name.substring(0, 30) + ']';
+
+
+                // Get connections
+                for (var connectionIndex in nodeItem.connections) {
+                    var nodeItemConnection = nodeItem.connections[connectionIndex];
+                    var nodeId = registeredNodesDict[nodeItemConnection.id] ? registeredNodesDict[nodeItemConnection.id] : ++index;
+                    registeredNodesDict[nodeItemConnection.id] = nodeId;
+                    var connectedNodeName = nodeId + '[fa:fa-' + nodeItem.icon +
+                        ' ' + nodeItemConnection.name.substring(0, 30) + ']';
+
+                    manage.lineage += separator + nodeName + connect + connectedNodeName;
+                }
+            }
+            debugger
+        }
+
+        function onGetAtlasLineageSuccessCallback(response) {
+            var edges = response.data.results.values.edges;
+            var vertices = response.data.results.values.vertices;
+            manage.atlasLineageConnects = [];
+            // Prepare dictionary of connections
+            for (var item in edges) {
+                var name = searchNameInAtlasEntities(item);
+
+                manage.atlasLineageConnects[item] = {
+                    icon: 'gear',
+                    name: name,
+                    connections: []
+                };
+                // Get connections
+                for (var connectionIndex in edges[item]) {
+                    var connectionName = searchNameInAtlasEntities(edges[item][connectionIndex]);
+                    manage.atlasLineageConnects[item].connections.push({
+                        id: edges[item][connectionIndex],
+                        name: connectionName
+                    });
+                }
+            }
+
+            // Prepare final lineage graph model
+            prepareLineageGraphModel(manage.atlasLineageConnects);
+        }
+
+        function onGetAtlasEntitiesSuccessCallback(response) {
+            for (var item in response.data) {
+                if (response.data[item].name === 'cur_hive_table1') {
+                    manage.curHiveTableId = response.data[item].id;
+                    manage.atlasEntities = response.data;
+                    // Once found, get lineage data
+                    RadiusService.getAtlasLineage(manage.curHiveTableId, onGetAtlasLineageSuccessCallback)
+                }
+            }
+        }
+
         function onSuccessCallback(response) {
             manage.groups = response.data;
             manage.step1Form.steward = $rootScope.loggedInUser ? $rootScope.loggedInUser.name : '';
-            debugger
             for (var groupIndex in response.data.vXGroups) {
                 // Fill other details
                 var item =
@@ -272,7 +345,6 @@
 
         function onGetAllUsersSuccessCallback(resp) {
             manage.step1Form.usersList = resp.data.vXUsers;
-            debugger
         }
 
         // Get User groups from user id
@@ -283,6 +355,9 @@
 
         // Get all users
         RadiusService.getAllUsers(onGetAllUsersSuccessCallback)
+
+        // Get lineage
+        RadiusService.getAtlasEntities(onGetAtlasEntitiesSuccessCallback)
     }
 
 })(angular.module('core.manage.controller', []));
