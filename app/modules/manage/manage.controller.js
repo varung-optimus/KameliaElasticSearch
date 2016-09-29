@@ -1,8 +1,9 @@
 (function (app) {
     app.controller('ManageController', ManageController);
-    ManageController.$inject = ['$scope', 'RadiusService', '$rootScope', 'esClient', 'sourcesTagQuery'];
+    ManageController.$inject = ['$scope', 'RadiusService', '$rootScope', 'esClient', 'sourcesTagQuery',
+        'toastr'];
 
-    function ManageController($scope, RadiusService, $rootScope, esClient, sourcesTagQuery) {
+    function ManageController($scope, RadiusService, $rootScope, esClient, sourcesTagQuery, toastr) {
         var manage = this;
         var groupDict = [];
         manage.view = {};
@@ -154,6 +155,29 @@
                 }
             }
         }
+
+        function createRequestInElasticSearch() {
+            esClient.create({
+                index: 'requests',
+                type: 'requests',
+                id: '2',
+                body: {
+                    title: 'Test 1',
+                    tags: ['y', 'z'],
+                    published: true,
+                    published_at: '2013-01-01',
+                    counter: 1
+                }
+            }, function (error, response) {
+                if (error) {
+                    toastr.error(error.message);
+                } else {
+                    toastr.success('Created successfully');
+                }
+            });
+        }
+
+        manage.createRequestInElasticSearch = createRequestInElasticSearch;
 
         function getConsGroupMembersSuccessCallback(response) {
             manage.groups.dataConsumers = response.data.vXUsers;

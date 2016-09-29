@@ -73,7 +73,9 @@
 
         <br/>
 
-        <button type="submit" class="c-next-btn btn btn-default pull-right standard-button btn-full-width">Submit</button>
+        <button type="submit" 
+            ng-click="manage.createRequestInElasticSearch()"
+            class="c-next-btn btn btn-default pull-right standard-button btn-full-width">Submit</button>
         <button type="submit" class="c-prev-btn btn u-color--black btn-default pull-right standard-button btn-full-width" ng-click="manage.isStep2Active = true;manage.isStep3Active = false">Prev</button>
 
     </form>
