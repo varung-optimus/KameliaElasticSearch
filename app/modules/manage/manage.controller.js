@@ -157,24 +157,20 @@
         }
 
         function createRequestInElasticSearch() {
-            esClient.create({
-                index: 'requests',
-                type: 'requests',
-                id: '2',
-                body: {
-                    title: 'Test 1',
-                    tags: ['y', 'z'],
-                    published: true,
-                    published_at: '2013-01-01',
-                    counter: 1
-                }
-            }, function (error, response) {
-                if (error) {
-                    toastr.error(error.message);
-                } else {
-                    toastr.success('Created successfully');
-                }
-            });
+            for (var index = 0; index < manage.rowsToDisplay.length; index++) {
+                esClient.create({
+                    index: 'requests',
+                    type: 'request',
+                    id: new Date().getTime()+index,
+                    body: manage.rowsToDisplay[index]._source
+                }, function (error, response) {
+                    if (error) {
+                        toastr.error(error.message);
+                    } else {
+                        toastr.success('Created successfully');
+                    }
+                });
+            }
         }
 
         manage.createRequestInElasticSearch = createRequestInElasticSearch;
